@@ -2,28 +2,30 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import GenderCheckbox from "./genderCheckbox";
+import useSignup from "../hooks/useSignup";
 
 export default function Singup() {
   const [inputs, setInputs] = useState({
-    fullName: "",
+    name: "",
     username: "",
     password: "",
     confirmPassword: "",
-    gender: "",
     email: "",
   });
 
-  // //   const { loading, signup } = useSignup();
+  const { loading, signup } = useSignup();
 
-  const handleCheckboxChange = (gender: any) => {
-    setInputs({ ...inputs, gender });
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    await signup(inputs);
+    setInputs({
+      name: "",
+      username: "",
+      password: "",
+      confirmPassword: "",
+      email: "",
+    });
   };
-
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     await signup(inputs);
-  //   };
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto  rounded-lg  shadow-lg bg-gray-900">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
@@ -31,7 +33,7 @@ export default function Singup() {
           Sign Up <span className="text-blue-500"> college admin panel</span>
         </h1>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label className="label p-2">
               <span className="text-base label-text text-white">Full Name</span>
@@ -40,10 +42,8 @@ export default function Singup() {
               type="text"
               placeholder="John Doe"
               className="w-full input input-bordered  h-10"
-              value={inputs.fullName}
-              onChange={(e) =>
-                setInputs({ ...inputs, fullName: e.target.value })
-              }
+              value={inputs.name}
+              onChange={(e) => setInputs({ ...inputs, name: e.target.value })}
             />
           </div>
 
@@ -106,11 +106,6 @@ export default function Singup() {
             />
           </div>
 
-          <GenderCheckbox
-            onCheckboxChange={handleCheckboxChange}
-            selectedGender={inputs.gender}
-          />
-
           <Link
             className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block text-white"
             href={"/login"}
@@ -121,9 +116,9 @@ export default function Singup() {
           <div>
             <button
               className="btn btn-block btn-sm mt-2 border border-slate-700 hover:bg-sky-600 hover:text-white"
-              disabled={false}
+              disabled={loading}
             >
-              {false ? (
+              {loading ? (
                 <span className="loading loading-spinner"></span>
               ) : (
                 "Sign Up"

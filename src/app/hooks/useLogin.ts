@@ -1,8 +1,11 @@
-import { useState } from "react";
-import Link from "next/link";
+import { error } from "console";
+import { useDeferredValue, useState } from "react";
+import toast from "react-hot-toast";
+import { useAuthContext } from "../context/authContext";
 
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
+  const { setAuthUser } = useAuthContext();
 
   const login = async (username: String, password: String) => {
     const success = handleInputErrors(username, password);
@@ -15,11 +18,10 @@ const useLogin = () => {
         body: JSON.stringify({ username, password }),
       });
       const data = await res.json();
-      if (data.error) {
-        throw new Error(data.error);
-      }
-      localStorage.setItem("chat-user", JSON.stringify(data));
+      localStorage.setItem("admin", JSON.stringify(data));
+      setAuthUser(data);
     } catch (error: any) {
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
@@ -30,6 +32,7 @@ export default useLogin;
 
 function handleInputErrors(username: String, password: String) {
   if (!username || !password) {
+    toast.error("enter all data");
     return false;
   }
   return true;
