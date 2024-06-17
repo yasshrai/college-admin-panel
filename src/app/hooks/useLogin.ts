@@ -1,5 +1,4 @@
-import { error } from "console";
-import { useDeferredValue, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../context/authContext";
 
