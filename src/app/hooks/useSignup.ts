@@ -1,10 +1,11 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../context/authContext";
-
+import { useRouter } from "next/navigation";
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
+  const router = useRouter();
 
   const signup = async ({
     name,
@@ -42,6 +43,7 @@ const useSignup = () => {
       localStorage.setItem("admin", JSON.stringify(data));
       setAuthUser(data);
       toast.success("admin created successfully");
+      router.push("/login");
     } catch (error: any) {
       toast.error(error.message);
     } finally {

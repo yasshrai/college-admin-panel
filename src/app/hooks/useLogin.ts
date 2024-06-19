@@ -1,10 +1,12 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../context/authContext";
+import { useRouter } from "next/navigation";
 
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
+  const router = useRouter();
 
   const login = async (username: String, password: String) => {
     const success = handleInputErrors(username, password);
@@ -23,6 +25,7 @@ const useLogin = () => {
       localStorage.setItem("admin", JSON.stringify(data));
       setAuthUser(data);
       toast.success("login successfully");
+      router.push("/");
     } catch (error: any) {
       toast.error(error.message);
       setAuthUser(null);
