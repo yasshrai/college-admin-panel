@@ -41,7 +41,9 @@ const useSignup = () => {
       }
       localStorage.setItem("admin", JSON.stringify(data));
       setAuthUser(data);
-    } catch (error) {
+      toast.success("admin created successfully");
+    } catch (error: any) {
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
@@ -68,19 +70,20 @@ function handleInputErrors({
   email,
 }: any) {
   if (!name || !username || !password || !confirmPassword || !email) {
-    toast.error("enter all data");
+    toast.error("enter all fields");
+    return false;
+  }
+  if (password.length < 7) {
+    toast.error("password should be bigger than 7 character");
     return false;
   }
   if (password !== confirmPassword) {
     toast.error("password is not similar");
-
     return false;
   }
-
   if (containsNumber(name)) {
-    toast.error("name container number ");
+    toast.error("name does not contain number ");
     return false;
   }
-
   return true;
 }

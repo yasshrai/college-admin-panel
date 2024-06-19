@@ -17,10 +17,15 @@ const useLogin = () => {
         body: JSON.stringify({ username, password }),
       });
       const data = await res.json();
+      if (data.error) {
+        throw new Error(data.error);
+      }
       localStorage.setItem("admin", JSON.stringify(data));
       setAuthUser(data);
+      toast.success("login successfully");
     } catch (error: any) {
       toast.error(error.message);
+      setAuthUser(null);
     } finally {
       setLoading(false);
     }
