@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import useSignup from "../hooks/useSignup";
 
-export default function Singup() {
+export default function Signup() {
   const [inputs, setInputs] = useState({
     name: "",
     username: "",
