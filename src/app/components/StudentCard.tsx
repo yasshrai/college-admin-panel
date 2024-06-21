@@ -1,5 +1,4 @@
 import React from "react";
-import { FaTimes } from "react-icons/fa"; // Importing the red cross icon from React Icons
 
 interface Student {
   name: string;
@@ -16,28 +15,25 @@ interface Student {
   fatherName?: string;
   motherName?: string;
   residenceAddress?: string;
-  parentContactNumber?: string;
+  parentContectNumber?: string;
   semester?: string;
   section?: string;
-  subjectInHighSchool?: string;
+  subjectinHighSchool?: string;
   regular?: boolean;
   busFacility?: boolean;
-  achievements?: string;
+  achivements?: string;
 }
 
 const StudentCard: React.FC<{ student: Student }> = ({ student }) => {
   return (
-    <div className="bg-gray-800 p-4 rounded-lg shadow-md mb-4 flex">
-      <div className="flex-shrink-0 mr-4">
+    <div className="bg-gray-800 p-4 rounded-lg shadow-md mb-4 flex flex-col lg:flex-row">
+      <div className="flex-shrink-0 mb-4 lg:mb-0 lg:mr-4">
         <h2 className="text-2xl font-semibold text-blue-500">{student.name}</h2>
         {student.leaveUniversity && (
-          <div className="flex items-center mt-2">
-            <FaTimes className="text-red-500 mr-1" />
-            <p className="text-red-500">Left University</p>
-          </div>
+          <p className="text-red-500">Left University ❌</p>
         )}
       </div>
-      <div className="flex-grow grid grid-cols-2 gap-4">
+      <div className="flex-grow grid grid-cols-1 md:grid-cols-2 gap-4">
         <p className="text-gray-300">
           <strong>Branch:</strong> {student.branch}
         </p>
@@ -66,16 +62,16 @@ const StudentCard: React.FC<{ student: Student }> = ({ student }) => {
           <strong>Email Address:</strong> {student.emailAddress}
         </p>
         <p className="text-gray-300">
-          <strong>Fathers Name:</strong> {student.fatherName}
+          <strong>Father Name:</strong> {student.fatherName}
         </p>
         <p className="text-gray-300">
-          <strong>Mothers Name:</strong> {student.motherName}
+          <strong>Mother Name:</strong> {student.motherName}
         </p>
         <p className="text-gray-300">
           <strong>Residence Address:</strong> {student.residenceAddress}
         </p>
         <p className="text-gray-300">
-          <strong>Parent Contact Number:</strong> {student.parentContactNumber}
+          <strong>Parent Contact Number:</strong> {student.parentContectNumber}
         </p>
         <p className="text-gray-300">
           <strong>Semester:</strong> {student.semester}
@@ -84,7 +80,7 @@ const StudentCard: React.FC<{ student: Student }> = ({ student }) => {
           <strong>Section:</strong> {student.section}
         </p>
         <p className="text-gray-300">
-          <strong>Subject in High School:</strong> {student.subjectInHighSchool}
+          <strong>Subject in High School:</strong> {student.subjectinHighSchool}
         </p>
         <p className="text-gray-300">
           <strong>Regular:</strong> {student.regular ? "Yes" : "No"}
@@ -93,7 +89,7 @@ const StudentCard: React.FC<{ student: Student }> = ({ student }) => {
           <strong>Bus Facility:</strong> {student.busFacility ? "Yes" : "No"}
         </p>
         <p className="text-gray-300">
-          <strong>Achievements:</strong> {student.achievements}
+          <strong>Achievements:</strong> {student.achivements}
         </p>
       </div>
     </div>

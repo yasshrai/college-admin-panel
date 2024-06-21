@@ -13,13 +13,13 @@ interface Professor {
 
 const ProfessorCard: React.FC<{ professor: Professor }> = ({ professor }) => {
   return (
-    <div className="bg-gray-800 p-4 rounded-lg shadow-md mb-4 flex">
-      <div className="flex-shrink-0 mr-4">
+    <div className="bg-gray-800 p-4 rounded-lg shadow-md mb-4 flex flex-col lg:flex-row">
+      <div className="flex-shrink-0 mb-4 lg:mb-0 lg:mr-4">
         <h2 className="text-2xl font-semibold text-blue-500">
           {professor.name}
         </h2>
       </div>
-      <div className="flex-grow grid grid-cols-2 gap-4">
+      <div className="flex-grow grid grid-cols-1 md:grid-cols-2 gap-4">
         <p className="text-gray-300">
           <strong>Age:</strong> {professor.age}
         </p>
