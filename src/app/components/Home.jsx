@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "../context/authContext";
-import LogoutButton from "./Logoutbutton";
 import { useEffect } from "react";
+import Navbar from "./Navbar";
 const Home = () => {
   const { authUser } = useAuthContext();
   const router = useRouter();
@@ -15,8 +15,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Redirecting</h1>
-      <LogoutButton></LogoutButton>
+      <Navbar></Navbar>
     </div>
   );
 };
