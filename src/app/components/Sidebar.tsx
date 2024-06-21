@@ -9,6 +9,8 @@ import StudentForm from "./form/StudentForm";
 import ProfessorForm from "./form/ProfessorForm";
 import Signup from "./Signup";
 import ChangePasswordForm from "./form/ChangePasswordForm";
+import UpdateProfessorRender from "./form/UpdateProfessorRender";
+import UpdateStudentRender from "./form/UpdateStudentRender";
 
 const Sidebar = () => {
   // State to track the selected section
@@ -25,13 +27,13 @@ const Sidebar = () => {
       case "addStudent":
         return <StudentForm />;
       case "updateStudent":
-        return <div>Update Student Component</div>;
+        return <UpdateStudentRender></UpdateStudentRender>;
       case "showStudents":
         return <div>Show All Students Component</div>;
       case "addProfessor":
         return <ProfessorForm />;
       case "updateProfessor":
-        return <div>Update Professor Component</div>;
+        return <UpdateProfessorRender></UpdateProfessorRender>;
       case "showProfessors":
         return <div>Show All Professors Component</div>;
       case "addAdmin":

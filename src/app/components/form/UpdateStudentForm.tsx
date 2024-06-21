@@ -1,0 +1,475 @@
+import React, { useEffect, useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import axios from "axios";
+import toast from "react-hot-toast";
+
+// Define the types for the form data
+interface StudentFormInputs {
+  name: string;
+  branch: string;
+  department?: string;
+  rollNumber?: string;
+  scholarNumber: string;
+  enrollmentNumber?: string;
+  admissionYear?: number;
+  leaveUniversity?: boolean;
+  passOutYear?: number;
+  mobileNumber?: string;
+  emailAddress?: string;
+  fatherName?: string;
+  motherName?: string;
+  residenceAddress?: string;
+  parentContactNumber?: string;
+  semester?: string;
+  section?: string;
+  subjectinHighSchool?: string;
+  regular?: boolean;
+  busFacility?: boolean;
+  achievements?: string;
+}
+
+// Define the props type
+interface UpdateStudentFormProps {
+  scholarNumber: string;
+}
+
+const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
+  scholarNumber,
+}) => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<StudentFormInputs>();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchStudentData = async () => {
+      try {
+        const response = await axios.put(
+          `http://localhost:4000/api/students/update/${scholarNumber}`
+        );
+        const student = response.data;
+
+        // Populate the form with the fetched data
+        reset(student);
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch the student data ");
+        setLoading(false);
+      }
+    };
+
+    fetchStudentData();
+  }, [scholarNumber, reset]);
+
+  const onSubmit: SubmitHandler<StudentFormInputs> = async (data) => {
+    try {
+      await axios.put(
+        `http://localhost:4000/api/students/update/${scholarNumber}`,
+        data
+      );
+      toast.success("Student data updated successfully");
+    } catch (err) {
+      toast.error("Failed to update student");
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className=" w-full h-full loading loading-spinner">Loading...</div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className=" w-full h-full flex items-start justify-center  gap-2">
+        <h1 className=" text-white font-bold text-center text-3xl">{error}</h1>
+        <h1 className=" text-white font-bold text-center text-3xl">
+          please chech the details
+        </h1>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-[80vw] md:w-[40vw] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-900">
+      <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
+        <h1 className="text-xl font-semibold text-center text-gray-300">
+          Update <span className="text-blue-500">Student</span>
+        </h1>
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">Name</span>
+            </label>
+            <input
+              {...register("name", { required: "Name is required" })}
+              className="w-full input input-bordered h-10"
+              placeholder="John Doe"
+            />
+            {errors.name && (
+              <p className="text-red-500">{errors.name.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">Branch</span>
+            </label>
+            <input
+              {...register("branch", { required: "Branch is required" })}
+              className="w-full input input-bordered h-10"
+              placeholder="CSE"
+            />
+            {errors.branch && (
+              <p className="text-red-500">{errors.branch.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Department
+              </span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("department")}
+              placeholder="Computer Science"
+            />
+            {errors.department && (
+              <p className="text-red-500">{errors.department.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Roll Number
+              </span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("rollNumber")}
+              placeholder="12345"
+            />
+            {errors.rollNumber && (
+              <p className="text-red-500">{errors.rollNumber.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Scholar Number
+              </span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("scholarNumber", {
+                required: "Scholar Number is required",
+              })}
+              placeholder="SCH12345"
+              disabled
+            />
+            {errors.scholarNumber && (
+              <p className="text-red-500">{errors.scholarNumber.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Enrollment Number
+              </span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("enrollmentNumber")}
+              placeholder="ENR12345"
+            />
+            {errors.enrollmentNumber && (
+              <p className="text-red-500">{errors.enrollmentNumber.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Admission Year
+              </span>
+            </label>
+            <input
+              type="number"
+              className="w-full input input-bordered h-10"
+              {...register("admissionYear")}
+              placeholder="2020"
+            />
+            {errors.admissionYear && (
+              <p className="text-red-500">{errors.admissionYear.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Leave University
+              </span>
+            </label>
+            <input
+              type="checkbox"
+              className="w-full input input-bordered h-10"
+              {...register("leaveUniversity")}
+            />
+            {errors.leaveUniversity && (
+              <p className="text-red-500">{errors.leaveUniversity.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Pass Out Year
+              </span>
+            </label>
+            <input
+              type="number"
+              className="w-full input input-bordered h-10"
+              {...register("passOutYear")}
+              placeholder="2024"
+            />
+            {errors.passOutYear && (
+              <p className="text-red-500">{errors.passOutYear.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Mobile Number
+              </span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("mobileNumber", {
+                pattern: {
+                  value: /^\d{10}$/,
+                  message: "Mobile number must be 10 digits",
+                },
+              })}
+              placeholder="9876543210"
+            />
+            {errors.mobileNumber && (
+              <p className="text-red-500">{errors.mobileNumber.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Email Address
+              </span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("emailAddress", {
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Email address is invalid",
+                },
+              })}
+              placeholder="john.doe@example.com"
+            />
+            {errors.emailAddress && (
+              <p className="text-red-500">{errors.emailAddress.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Father Name
+              </span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("fatherName")}
+              placeholder="Mr. Doe"
+            />
+            {errors.fatherName && (
+              <p className="text-red-500">{errors.fatherName.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Mother Name
+              </span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("motherName")}
+              placeholder="Mrs. Doe"
+            />
+            {errors.motherName && (
+              <p className="text-red-500">{errors.motherName.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Residence Address
+              </span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("residenceAddress")}
+              placeholder="1234 Elm Street"
+            />
+            {errors.residenceAddress && (
+              <p className="text-red-500">{errors.residenceAddress.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Parent Contact Number
+              </span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("parentContactNumber", {
+                pattern: {
+                  value: /^\d{10}$/,
+                  message: "Parent contact number must be 10 digits",
+                },
+              })}
+              placeholder="9876543210"
+            />
+            {errors.parentContactNumber && (
+              <p className="text-red-500">
+                {errors.parentContactNumber.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">Semester</span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("semester")}
+              placeholder="5"
+            />
+            {errors.semester && (
+              <p className="text-red-500">{errors.semester.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">Section</span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("section")}
+              placeholder="A"
+            />
+            {errors.section && (
+              <p className="text-red-500">{errors.section.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Subject in High School
+              </span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("subjectinHighSchool")}
+              placeholder="Mathematics"
+            />
+            {errors.subjectinHighSchool && (
+              <p className="text-red-500">
+                {errors.subjectinHighSchool.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">Regular</span>
+            </label>
+            <input
+              type="checkbox"
+              className="w-full input input-bordered h-10"
+              {...register("regular")}
+            />
+            {errors.regular && (
+              <p className="text-red-500">{errors.regular.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Bus Facility
+              </span>
+            </label>
+            <input
+              type="checkbox"
+              className="w-full input input-bordered h-10"
+              {...register("busFacility")}
+            />
+            {errors.busFacility && (
+              <p className="text-red-500">{errors.busFacility.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">
+                Achievements
+              </span>
+            </label>
+            <input
+              className="w-full input input-bordered h-10"
+              {...register("achievements")}
+              placeholder="Achievements"
+            />
+            {errors.achievements && (
+              <p className="text-red-500">{errors.achievements.message}</p>
+            )}
+          </div>
+
+          <div>
+            <button
+              className="btn btn-block btn-sm mt-2 border border-slate-700 hover:bg-sky-600 hover:text-white"
+              type="submit"
+            >
+              {loading ? (
+                <span className="loading loading-spinner "></span>
+              ) : (
+                "Submit"
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default UpdateStudentForm;
