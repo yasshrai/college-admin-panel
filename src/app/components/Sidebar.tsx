@@ -7,6 +7,7 @@ import HamburgMenu from "./HamburgMenu";
 import HomeMessage from "./HomeMessage";
 import StudentForm from "./form/StudentForm";
 import ProfessorForm from "./form/ProfessorForm";
+import Signup from "./Signup";
 
 const Sidebar = () => {
   // State to track the selected section
@@ -33,7 +34,13 @@ const Sidebar = () => {
       case "showProfessors":
         return <div>Show All Professors Component</div>;
       case "addAdmin":
-        return <div>Add Admin Component</div>;
+        return (
+          <div className=" h-[89vh] w-[85vw] bg-gray-900 flex items-center justify-center">
+            <div className=" h-[80vh] w-[40vw]">
+              <Signup heading="create another admin  -"></Signup>
+            </div>
+          </div>
+        );
       case "changePassword":
         return <div>Change Password Component</div>;
       default:

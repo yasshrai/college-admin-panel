@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import useSignup from "../hooks/useSignup";
 
-export default function Signup() {
+export default function Signup({ heading }: any) {
   const [inputs, setInputs] = useState({
     name: "",
     username: "",
@@ -31,7 +31,7 @@ export default function Signup() {
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto  rounded-lg  shadow-lg bg-gray-900">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
         <h1 className="text-xl font-semibold text-center text-gray-300">
-          Sign Up <span className="text-blue-500"> college admin panel</span>
+          {heading} <span className="text-blue-500"> college admin panel</span>
         </h1>
 
         <form onSubmit={handleSubmit}>
@@ -106,13 +106,6 @@ export default function Signup() {
               onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
             />
           </div>
-
-          <Link
-            className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block text-white"
-            href={"/login"}
-          >
-            Already have an account?
-          </Link>
 
           <div>
             <button

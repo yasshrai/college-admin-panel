@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import useEnterProfessorData from "@/app/hooks/useEnterProfessorData";
 
 type ProfessorFormInputs = {
   name: string;
@@ -18,11 +19,15 @@ const ProfessorForm: React.FC = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ProfessorFormInputs>();
-
-  const onSubmit: SubmitHandler<ProfessorFormInputs> = (data) => {
-    console.log(data);
+  const { loading, createProfessor } = useEnterProfessorData();
+  const onSubmit: SubmitHandler<ProfessorFormInputs> = async (data) => {
+    const success = await createProfessor(data);
+    if (success) {
+      reset();
+    }
   };
 
   return (
@@ -71,9 +76,7 @@ const ProfessorForm: React.FC = () => {
               </label>
               <input
                 className="w-full input input-bordered h-10"
-                {...register("department", {
-                  required: "Department is required",
-                })}
+                {...register("department")}
                 placeholder="Computer Science"
               />
               {errors.department && (
@@ -89,7 +92,7 @@ const ProfessorForm: React.FC = () => {
               </label>
               <input
                 className="w-full input input-bordered h-10"
-                {...register("position", { required: "Position is required" })}
+                {...register("position")}
                 placeholder="Professor"
               />
               {errors.position && (
@@ -105,9 +108,7 @@ const ProfessorForm: React.FC = () => {
               </label>
               <input
                 className="w-full input input-bordered h-10"
-                {...register("professorId", {
-                  required: "Professor ID is required",
-                })}
+                {...register("professorId")}
                 placeholder="PROF12345"
               />
               {errors.professorId && (
@@ -124,7 +125,6 @@ const ProfessorForm: React.FC = () => {
               <input
                 className="w-full input input-bordered h-10"
                 {...register("mobileNumber", {
-                  required: "Mobile number is required",
                   pattern: {
                     value: /^\d{10}$/,
                     message: "Mobile number must be 10 digits",
@@ -146,7 +146,6 @@ const ProfessorForm: React.FC = () => {
               <input
                 className="w-full input input-bordered h-10"
                 {...register("emailAddress", {
-                  required: "Email address is required",
                   pattern: {
                     value: /\S+@\S+\.\S+/,
                     message: "Email address is invalid",
@@ -167,9 +166,7 @@ const ProfessorForm: React.FC = () => {
               </label>
               <input
                 className="w-full input input-bordered h-10"
-                {...register("residenceAddress", {
-                  required: "Residence address is required",
-                })}
+                {...register("residenceAddress")}
                 placeholder="1234 Elm Street"
               />
               {errors.residenceAddress && (
@@ -184,7 +181,11 @@ const ProfessorForm: React.FC = () => {
                 className="btn btn-block btn-sm mt-2 border border-slate-700 hover:bg-sky-600 hover:text-white"
                 type="submit"
               >
-                Submit
+                {loading ? (
+                  <span className="loading loading-spinner "></span>
+                ) : (
+                  "Submit"
+                )}
               </button>
             </div>
           </form>
