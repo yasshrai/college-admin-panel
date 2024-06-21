@@ -8,6 +8,7 @@ import HomeMessage from "./HomeMessage";
 import StudentForm from "./form/StudentForm";
 import ProfessorForm from "./form/ProfessorForm";
 import Signup from "./Signup";
+import ChangePasswordForm from "./form/ChangePasswordForm";
 
 const Sidebar = () => {
   // State to track the selected section
@@ -42,7 +43,7 @@ const Sidebar = () => {
           </div>
         );
       case "changePassword":
-        return <div>Change Password Component</div>;
+        return <ChangePasswordForm></ChangePasswordForm>;
       default:
         return <HomeMessage />;
     }

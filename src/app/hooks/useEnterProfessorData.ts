@@ -6,7 +6,6 @@ const useEnterProfessorData = () => {
 
   const createProfessor = async (professorData: any) => {
     setLoading(true);
-    console.log(professorData);
     try {
       const res = await fetch("http://localhost:4000/api/professors/create", {
         method: "POST",
