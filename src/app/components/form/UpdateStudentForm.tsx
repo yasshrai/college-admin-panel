@@ -224,7 +224,7 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
             </label>
             <input
               type="checkbox"
-              className="w-full input input-bordered h-10"
+              className=" checkbox checkbox-primary"
               {...register("leaveUniversity")}
             />
             {errors.leaveUniversity && (
@@ -414,7 +414,7 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
             </label>
             <input
               type="checkbox"
-              className="w-full input input-bordered h-10"
+              className="checkbox checkbox-primary"
               {...register("regular")}
             />
             {errors.regular && (
@@ -430,7 +430,7 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
             </label>
             <input
               type="checkbox"
-              className="w-full input input-bordered h-10"
+              className="checkbox checkbox-primary"
               {...register("busFacility")}
             />
             {errors.busFacility && (
