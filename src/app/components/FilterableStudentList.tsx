@@ -1,12 +1,13 @@
-// StudentForm.tsx
-import React from "react";
+// FilterableStudentList.tsx
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import useEnterStudentData from "@/app/hooks/useEnterStudentData";
-import DropDown from "../DropDown";
+import axios from "axios";
+import DropDown from "./DropDown";
+import StudentCard from "./StudentCard";
 
-type StudentFormInputs = {
-  name: string;
-  branch: string;
+interface FilterFormInputs {
+  name?: string;
+  branch?: string;
   department?: string;
   rollNumber?: string;
   scholarNumber?: string;
@@ -19,51 +20,105 @@ type StudentFormInputs = {
   fatherName?: string;
   motherName?: string;
   residenceAddress?: string;
-  parentContectNumber?: string;
+  parentContactNumber?: string;
   semester?: string;
   section?: string;
   subjectinHighSchool?: string;
   regular?: boolean;
   busFacility?: boolean;
-  achivements?: string;
-};
+  achievements?: string;
+}
 
-const StudentForm: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<StudentFormInputs>();
-  const { loading, createStudent } = useEnterStudentData();
+interface Student {
+  scholarNumber: string;
+  name: string;
+  branch: string;
+  department?: string;
+  rollNumber?: string;
+  enrollmentNumber?: string;
+  admissionYear?: number;
+  leaveUniversity?: boolean;
+  passOutYear?: number;
+  mobileNumber?: string;
+  emailAddress?: string;
+  fatherName?: string;
+  motherName?: string;
+  residenceAddress?: string;
+  parentContactNumber?: string;
+  semester?: string;
+  section?: string;
+  subjectinHighSchool?: string;
+  regular?: boolean;
+  busFacility?: boolean;
+  achievements?: string;
+}
+const FilterableStudentList: React.FC = () => {
+  const { register, handleSubmit, reset } = useForm<FilterFormInputs>({
+    defaultValues: {
+      leaveUniversity: false,
+      regular: false,
+      busFacility: false,
+    },
+  });
 
-  const onSubmit: SubmitHandler<StudentFormInputs> = async (data) => {
-    const success = await createStudent(data);
-    if (success) {
-      reset();
+  const [students, setStudents] = useState<Student[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const onSubmit: SubmitHandler<FilterFormInputs> = async (filters) => {
+    setLoading(true);
+    setError(null);
+
+    const filteredFiltersObj = filteredFilters(filters);
+    console.log(filteredFiltersObj);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/students/get/filter",
+        { filters: filteredFiltersObj }
+      );
+      setStudents(response.data);
+      setLoading(false);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to fetch filtered students data");
+      setLoading(false);
     }
   };
 
+  const filteredFilters = (filters: FilterFormInputs) => {
+    return Object.keys(filters).reduce((acc, key) => {
+      const value = filters[key as keyof FilterFormInputs];
+      if (
+        value !== undefined &&
+        value !== "" &&
+        value !== null &&
+        value !== false
+      ) {
+        (acc as any)[key] = value;
+      }
+      return acc;
+    }, {} as Partial<FilterFormInputs>);
+  };
+
   return (
-    <div className="h-[89vh] w-[85vw] bg-gray-900 overflow-auto ">
-      <div className="w-[80vw] md:w-[40vw] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg ">
+    <div className="h-[89vh] w-[85vw] bg-gray-900 overflow-auto">
+      <div className="w-[80vw] md:w-[80vw] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg">
         <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
           <h1 className="text-xl font-semibold text-center text-gray-300">
-            Add <span className="text-blue-500">Student</span>
+            Filter <span className="text-blue-500">Students</span>
           </h1>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className=" w-[40vw] ">
+            {/* Text Inputs */}
             <div>
               <label className="label p-2">
                 <span className="text-base label-text text-white">Name</span>
               </label>
               <input
-                {...register("name", { required: "Name is required" })}
+                {...register("name")}
                 className="w-full input input-bordered h-10"
               />
-              {errors.name && (
-                <p className="text-red-500">{errors.name.message}</p>
-              )}
             </div>
 
             <DropDown
@@ -82,7 +137,6 @@ const StudentForm: React.FC = () => {
               ]}
               register={register}
             />
-
             <DropDown
               name="department"
               label="Department"
@@ -96,170 +150,6 @@ const StudentForm: React.FC = () => {
               ]}
               register={register}
             />
-
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Roll Number
-                </span>
-              </label>
-              <input
-                {...register("rollNumber")}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Scholar Number
-                </span>
-              </label>
-              <input
-                {...register("scholarNumber")}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Enrollment Number
-                </span>
-              </label>
-              <input
-                {...register("enrollmentNumber")}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Admission Year
-                </span>
-              </label>
-              <input
-                type="number"
-                {...register("admissionYear")}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Leave University
-                </span>
-              </label>
-              <input
-                type="checkbox"
-                {...register("leaveUniversity")}
-                className="checkbox checkbox-primary"
-              />
-            </div>
-
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Pass Out Year
-                </span>
-              </label>
-              <input
-                type="number"
-                {...register("passOutYear")}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Mobile Number
-                </span>
-              </label>
-              <input
-                {...register("mobileNumber", {
-                  pattern: {
-                    value: /^\d{10}$/,
-                    message: "Mobile number must be 10 digits",
-                  },
-                })}
-                className="w-full input input-bordered h-10"
-              />
-              {errors.mobileNumber && (
-                <p className="text-red-500">{errors.mobileNumber.message}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Email Address
-                </span>
-              </label>
-              <input
-                {...register("emailAddress", {
-                  pattern: {
-                    value: /\S+@\S+\.\S+/,
-                    message: "Email address is invalid",
-                  },
-                })}
-                className="w-full input input-bordered h-10"
-              />
-              {errors.emailAddress && (
-                <p className="text-red-500">{errors.emailAddress.message}</p>
-              )}
-            </div>
-
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Father Name
-                </span>
-              </label>
-              <input
-                {...register("fatherName")}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Mother Name
-                </span>
-              </label>
-              <input
-                {...register("motherName")}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Residence Address
-                </span>
-              </label>
-              <input
-                {...register("residenceAddress")}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Parent Contact Number
-                </span>
-              </label>
-              <input
-                {...register("parentContectNumber")}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-
             <DropDown
               name="semester"
               label="Semester"
@@ -276,14 +166,12 @@ const StudentForm: React.FC = () => {
               ]}
               register={register}
             />
-
             <DropDown
               name="section"
               label="Section"
               options={["", "A", "B", "C", "D", "E", "F", "G", "h"]}
               register={register}
             />
-
             <DropDown
               name="subjectinHighSchool"
               label="Subject in High School"
@@ -298,6 +186,157 @@ const StudentForm: React.FC = () => {
               register={register}
             />
 
+            {/* Other Inputs */}
+            <div>
+              <label className="label p-2">
+                <span className="text-base label-text text-white">
+                  Roll Number
+                </span>
+              </label>
+              <input
+                {...register("rollNumber")}
+                className="w-full input input-bordered h-10"
+              />
+            </div>
+            <div>
+              <label className="label p-2">
+                <span className="text-base label-text text-white">
+                  Scholar Number
+                </span>
+              </label>
+              <input
+                {...register("scholarNumber")}
+                className="w-full input input-bordered h-10"
+              />
+            </div>
+            <div>
+              <label className="label p-2">
+                <span className="text-base label-text text-white">
+                  Enrollment Number
+                </span>
+              </label>
+              <input
+                {...register("enrollmentNumber")}
+                className="w-full input input-bordered h-10"
+              />
+            </div>
+            <div>
+              <label className="label p-2">
+                <span className="text-base label-text text-white">
+                  Admission Year
+                </span>
+              </label>
+              <input
+                type="text"
+                {...register("admissionYear")}
+                className="w-full input input-bordered h-10"
+              />
+            </div>
+            <div>
+              <label className="label p-2">
+                <span className="text-base label-text text-white">
+                  Leave University
+                </span>
+              </label>
+              <input
+                type="checkbox"
+                {...register("leaveUniversity")}
+                className="checkbox checkbox-primary"
+              />
+            </div>
+            <div>
+              <label className="label p-2">
+                <span className="text-base label-text text-white">
+                  Pass Out Year
+                </span>
+              </label>
+              <input
+                type="text"
+                {...register("passOutYear")}
+                className="w-full input input-bordered h-10"
+              />
+            </div>
+            <div>
+              <label className="label p-2">
+                <span className="text-base label-text text-white">
+                  Mobile Number
+                </span>
+              </label>
+              <input
+                {...register("mobileNumber", {
+                  pattern: {
+                    value: /^\d{10}$/,
+                    message: "Mobile number must be 10 digits",
+                  },
+                })}
+                className="w-full input input-bordered h-10"
+              />
+            </div>
+            <div>
+              <label className="label p-2">
+                <span className="text-base label-text text-white">
+                  Email Address
+                </span>
+              </label>
+              <input
+                {...register("emailAddress", {
+                  pattern: {
+                    value: /\S+@\S+\.\S+/,
+                    message: "Email address is invalid",
+                  },
+                })}
+                className="w-full input input-bordered h-10"
+              />
+            </div>
+            <div>
+              <label className="label p-2">
+                <span className="text-base label-text text-white">
+                  Father Name
+                </span>
+              </label>
+              <input
+                {...register("fatherName")}
+                className="w-full input input-bordered h-10"
+              />
+            </div>
+            <div>
+              <label className="label p-2">
+                <span className="text-base label-text text-white">
+                  Mother Name
+                </span>
+              </label>
+              <input
+                {...register("motherName")}
+                className="w-full input input-bordered h-10"
+              />
+            </div>
+            <div>
+              <label className="label p-2">
+                <span className="text-base label-text text-white">
+                  Residence Address
+                </span>
+              </label>
+              <input
+                {...register("residenceAddress")}
+                className="w-full input input-bordered h-10"
+              />
+            </div>
+            <div>
+              <label className="label p-2">
+                <span className="text-base label-text text-white">
+                  Parent Contact Number
+                </span>
+              </label>
+              <input
+                {...register("parentContactNumber", {
+                  pattern: {
+                    value: /^\d{10}$/,
+                    message: "Contact number must be 10 digits",
+                  },
+                })}
+                className="w-full input input-bordered h-10"
+              />
+            </div>
             <div>
               <label className="label p-2">
                 <span className="text-base label-text text-white">Regular</span>
@@ -308,7 +347,6 @@ const StudentForm: React.FC = () => {
                 className="checkbox checkbox-primary"
               />
             </div>
-
             <div>
               <label className="label p-2">
                 <span className="text-base label-text text-white">
@@ -321,7 +359,6 @@ const StudentForm: React.FC = () => {
                 className="checkbox checkbox-primary"
               />
             </div>
-
             <div>
               <label className="label p-2">
                 <span className="text-base label-text text-white">
@@ -329,28 +366,47 @@ const StudentForm: React.FC = () => {
                 </span>
               </label>
               <input
-                {...register("achivements")}
+                {...register("achievements")}
                 className="w-full input input-bordered h-10"
               />
             </div>
 
-            <div>
+            <div className="flex justify-between mt-6">
+              <button type="submit" className="btn btn-primary">
+                Filter
+              </button>
               <button
-                className="btn btn-block btn-sm mt-2 border border-slate-700 hover:bg-sky-600 hover:text-white"
-                type="submit"
+                type="button"
+                onClick={() => reset()}
+                className="btn btn-secondary"
               >
-                {loading ? (
-                  <span className="loading loading-spinner "></span>
-                ) : (
-                  "Submit"
-                )}
+                Reset
               </button>
             </div>
           </form>
+        </div>
+
+        {/* Display the filtered students */}
+        <div className="w-full mt-6">
+          {loading && <p>Loading...</p>}
+          {error && <p className="text-red-500">{error}</p>}
+          {!loading && !error && students.length === 0 && (
+            <p>No students found.</p>
+          )}
+          {!loading && !error && students.length > 0 && (
+            <div className="w-full md:w-[80%] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-900 mt-6 p-6">
+              <h1 className="text-2xl font-semibold text-center text-gray-300 mb-4">
+                Student <span className="text-blue-500">List</span>
+              </h1>
+              {students.map((student) => (
+                <StudentCard key={student.scholarNumber} student={student} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default StudentForm;
+export default FilterableStudentList;

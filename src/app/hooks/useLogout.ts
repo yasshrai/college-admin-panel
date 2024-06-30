@@ -10,6 +10,7 @@ const useLogout = () => {
 
   const logout = async () => {
     setLoading(true);
+    const toastLogout = toast.loading("logging out");
     try {
       const res = await fetch("http://localhost:4000/api/admin/logout", {
         method: "POST",
@@ -27,6 +28,7 @@ const useLogout = () => {
       router.push("/login");
     } finally {
       setLoading(false);
+      toast.dismiss(toastLogout);
     }
   };
   return { loading, logout };
