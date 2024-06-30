@@ -14,6 +14,7 @@ import UpdateStudentRender from "./form/UpdateStudentRender";
 import StudentList from "./StudentList";
 import ProfessorList from "./ProfessorList";
 import FilterableStudentList from "./FilterableStudentList";
+import AdminList from "./AdminList";
 
 const Sidebar = () => {
   // State to track the selected section
@@ -51,6 +52,8 @@ const Sidebar = () => {
         );
       case "changePassword":
         return <ChangePasswordForm></ChangePasswordForm>;
+      case "showAdmins":
+        return <AdminList></AdminList>;
       default:
         return <HomeMessage />;
     }
@@ -131,7 +134,7 @@ const Sidebar = () => {
           </div>
           <div>
             <div
-              className="flex flex-row items-center justify-evenly gap-1 hover:bg-gray-700 w-[15vw] p-3 cursor-pointer mb-6"
+              className="flex flex-row items-center justify-evenly gap-1 hover:bg-gray-700 w-[15vw] p-3 cursor-pointer mb-2 "
               onClick={() => handleSectionClick("admin")}
             >
               <span>
@@ -145,6 +148,12 @@ const Sidebar = () => {
                 onClick={() => handleSectionClick("addAdmin")}
               >
                 Add Admin Details
+              </h2>
+              <h2
+                className="cursor-pointer w-full flex items-center justify-center py-2 hover:bg-indigo-400 hover:text-black transition ease-in-out duration-100"
+                onClick={() => handleSectionClick("showAdmins")}
+              >
+                Show all Admins
               </h2>
               <h2
                 className="cursor-pointer w-full flex items-center justify-center py-2 hover:bg-indigo-400 hover:text-black transition ease-in-out duration-100"

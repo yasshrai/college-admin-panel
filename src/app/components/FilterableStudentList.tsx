@@ -39,12 +39,6 @@ interface Student {
   admissionYear?: number;
   leaveUniversity?: boolean;
   passOutYear?: number;
-  mobileNumber?: string;
-  emailAddress?: string;
-  fatherName?: string;
-  motherName?: string;
-  residenceAddress?: string;
-  parentContactNumber?: string;
   semester?: string;
   section?: string;
   subjectinHighSchool?: string;
@@ -103,8 +97,8 @@ const FilterableStudentList: React.FC = () => {
 
   return (
     <div className="h-[89vh] w-[85vw] bg-gray-900 overflow-auto">
-      <div className="w-[80vw] md:w-[80vw] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg">
-        <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
+      <div className="w-full md:w-[80%]   justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-900 mt-6 p-6">
+        <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 flex flex-col items-center">
           <h1 className="text-xl font-semibold text-center text-gray-300">
             Filter <span className="text-blue-500">Students</span>
           </h1>
@@ -253,87 +247,6 @@ const FilterableStudentList: React.FC = () => {
               <input
                 type="text"
                 {...register("passOutYear")}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Mobile Number
-                </span>
-              </label>
-              <input
-                {...register("mobileNumber", {
-                  pattern: {
-                    value: /^\d{10}$/,
-                    message: "Mobile number must be 10 digits",
-                  },
-                })}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Email Address
-                </span>
-              </label>
-              <input
-                {...register("emailAddress", {
-                  pattern: {
-                    value: /\S+@\S+\.\S+/,
-                    message: "Email address is invalid",
-                  },
-                })}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Father Name
-                </span>
-              </label>
-              <input
-                {...register("fatherName")}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Mother Name
-                </span>
-              </label>
-              <input
-                {...register("motherName")}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Residence Address
-                </span>
-              </label>
-              <input
-                {...register("residenceAddress")}
-                className="w-full input input-bordered h-10"
-              />
-            </div>
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Parent Contact Number
-                </span>
-              </label>
-              <input
-                {...register("parentContactNumber", {
-                  pattern: {
-                    value: /^\d{10}$/,
-                    message: "Contact number must be 10 digits",
-                  },
-                })}
                 className="w-full input input-bordered h-10"
               />
             </div>
