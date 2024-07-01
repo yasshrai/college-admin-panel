@@ -1,13 +1,18 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [authUser, setAuthUser] = useState(
-    JSON.parse(localStorage.getItem("admin")) || null
-  );
+  const [authUser, setAuthUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("admin"));
+    if (storedUser) {
+      setAuthUser(storedUser);
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ authUser, setAuthUser }}>
@@ -15,6 +20,7 @@ export const AuthContextProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
 export const useAuthContext = () => {
   return useContext(AuthContext);
 };
