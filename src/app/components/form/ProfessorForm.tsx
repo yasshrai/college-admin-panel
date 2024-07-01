@@ -3,6 +3,7 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useEnterProfessorData from "@/app/hooks/useEnterProfessorData";
+import DropDown from "../DropDown";
 
 type ProfessorFormInputs = {
   name: string;
@@ -46,7 +47,6 @@ const ProfessorForm: React.FC = () => {
               <input
                 {...register("name", { required: "Name is required" })}
                 className="w-full input input-bordered h-10"
-                placeholder="John Doe"
               />
               {errors.name && (
                 <p className="text-red-500">{errors.name.message}</p>
@@ -58,47 +58,40 @@ const ProfessorForm: React.FC = () => {
                 <span className="text-base label-text text-white">Age</span>
               </label>
               <input
-                type="number"
+                type="text"
                 className="w-full input input-bordered h-10"
                 {...register("age", { required: "Age is required" })}
-                placeholder="40"
               />
               {errors.age && (
                 <p className="text-red-500">{errors.age.message}</p>
               )}
             </div>
 
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Department
-                </span>
-              </label>
-              <input
-                className="w-full input input-bordered h-10"
-                {...register("department")}
-                placeholder="Computer Science"
-              />
-              {errors.department && (
-                <p className="text-red-500">{errors.department.message}</p>
-              )}
-            </div>
+            <DropDown
+              name="department"
+              label="Department"
+              options={[
+                "",
+                "School of Computer Science",
+                "School of Management",
+                "School of Commerce",
+                "School of Fashion",
+                "School of LAW",
+              ]}
+              register={register}
+            />
 
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Position
-                </span>
-              </label>
-              <input
-                className="w-full input input-bordered h-10"
-                {...register("position")}
-                placeholder="Professor"
-              />
-              {errors.position && (
-                <p className="text-red-500">{errors.position.message}</p>
-              )}
-            </div>
+            <DropDown
+              name="position"
+              label="Position"
+              options={[
+                "",
+                "assistant professor",
+                "Head of Department",
+                "senior professor",
+              ]}
+              register={register}
+            />
 
             <div>
               <label className="label p-2">
@@ -109,7 +102,6 @@ const ProfessorForm: React.FC = () => {
               <input
                 className="w-full input input-bordered h-10"
                 {...register("professorId")}
-                placeholder="PROF12345"
               />
               {errors.professorId && (
                 <p className="text-red-500">{errors.professorId.message}</p>
@@ -130,7 +122,6 @@ const ProfessorForm: React.FC = () => {
                     message: "Mobile number must be 10 digits",
                   },
                 })}
-                placeholder="9876543210"
               />
               {errors.mobileNumber && (
                 <p className="text-red-500">{errors.mobileNumber.message}</p>
@@ -151,7 +142,6 @@ const ProfessorForm: React.FC = () => {
                     message: "Email address is invalid",
                   },
                 })}
-                placeholder="john.doe@example.com"
               />
               {errors.emailAddress && (
                 <p className="text-red-500">{errors.emailAddress.message}</p>
@@ -167,7 +157,6 @@ const ProfessorForm: React.FC = () => {
               <input
                 className="w-full input input-bordered h-10"
                 {...register("residenceAddress")}
-                placeholder="1234 Elm Street"
               />
               {errors.residenceAddress && (
                 <p className="text-red-500">

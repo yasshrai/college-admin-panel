@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import StudentCard from "./StudentCard"; // Importing the StudentCard component
+import toast from "react-hot-toast";
 
 interface Student {
   scholarNumber: string;
@@ -40,7 +41,6 @@ const StudentList: React.FC = () => {
         setStudents(response.data);
         setLoading(false);
       } catch (err) {
-        console.error(err);
         setError("Failed to fetch students data");
         setLoading(false);
       }

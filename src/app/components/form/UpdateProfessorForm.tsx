@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
+import DropDown from "../DropDown";
 
 // Define the types for the form data
 interface ProfessorFormData {
@@ -119,35 +120,30 @@ const UpdateProfessorForm: React.FC<UpdateProfessorFormProps> = ({
             {errors.age && <p className="text-red-500">{errors.age.message}</p>}
           </div>
 
-          <div>
-            <label className="label p-2">
-              <span className="text-base label-text text-white">
-                Department
-              </span>
-            </label>
-            <input
-              className="w-full input input-bordered h-10"
-              {...register("department")}
-              placeholder="Computer Science"
-            />
-            {errors.department && (
-              <p className="text-red-500">{errors.department.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="label p-2">
-              <span className="text-base label-text text-white">Position</span>
-            </label>
-            <input
-              className="w-full input input-bordered h-10"
-              {...register("position")}
-              placeholder="Professor"
-            />
-            {errors.position && (
-              <p className="text-red-500">{errors.position.message}</p>
-            )}
-          </div>
+          <DropDown
+            name="department"
+            label="Department"
+            options={[
+              "",
+              "School of Computer Science",
+              "School of Management",
+              "School of Commerce",
+              "School of Fashion",
+              "School of LAW",
+            ]}
+            register={register}
+          />
+          <DropDown
+            name="position"
+            label="Position"
+            options={[
+              "",
+              "assistant professor",
+              "Head of Department",
+              "senior professor",
+            ]}
+            register={register}
+          />
 
           <div>
             <label className="label p-2">

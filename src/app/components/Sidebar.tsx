@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { PiStudentBold } from "react-icons/pi";
 import { FaChalkboardTeacher } from "react-icons/fa";
-import HamburgMenu from "./HamburgMenu";
+import { GiHamburgerMenu } from "react-icons/gi";
 import HomeMessage from "./HomeMessage";
 import StudentForm from "./form/StudentForm";
 import ProfessorForm from "./form/ProfessorForm";
@@ -17,115 +17,139 @@ import FilterableStudentList from "./FilterableStudentList";
 import AdminList from "./AdminList";
 
 const Sidebar = () => {
-  // State to track the selected section
   const [selectedSection, setSelectedSection] = useState("home");
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Function to handle button clicks and update the state
   const handleSectionClick = (section: any) => {
     setSelectedSection(section);
+    setMenuOpen(false);
   };
 
-  // Render the appropriate component based on the selected section
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   const renderContent = () => {
     switch (selectedSection) {
       case "addStudent":
         return <StudentForm />;
       case "updateStudent":
-        return <UpdateStudentRender></UpdateStudentRender>;
+        return <UpdateStudentRender />;
       case "showStudents":
-        return <StudentList></StudentList>;
+        return <StudentList />;
       case "filterStudents":
-        return <FilterableStudentList></FilterableStudentList>;
+        return <FilterableStudentList />;
       case "addProfessor":
         return <ProfessorForm />;
       case "updateProfessor":
-        return <UpdateProfessorRender></UpdateProfessorRender>;
+        return <UpdateProfessorRender />;
       case "showProfessors":
-        return <ProfessorList></ProfessorList>;
+        return <ProfessorList />;
       case "addAdmin":
         return (
-          <div className=" h-[89vh] w-[85vw] bg-gray-900 flex items-center justify-center">
-            <div className=" h-[80vh] w-[40vw]">
-              <Signup heading="create another admin  -"></Signup>
+          <div className="h-[89vh] w-[85vw] bg-gray-900 flex items-center justify-center">
+            <div className="h-[80vh] w-[40vw]">
+              <Signup heading="create another admin -" />
             </div>
           </div>
         );
       case "changePassword":
-        return <ChangePasswordForm></ChangePasswordForm>;
+        return <ChangePasswordForm />;
       case "showAdmins":
-        return <AdminList></AdminList>;
+        return <AdminList />;
       default:
         return <HomeMessage />;
     }
   };
 
+  const getMenuItemClass = (section: any) => {
+    return `cursor-pointer w-full flex items-center justify-center py-2 transition ease-in-out duration-100 ${
+      selectedSection === section
+        ? "bg-indigo-400 text-black"
+        : "hover:bg-indigo-400 hover:text-black"
+    }`;
+  };
+
   return (
     <div className="flex flex-row">
-      <HamburgMenu></HamburgMenu>
-      <div className="hidden md:block h-[89vh] bg-gray-950 w-[15vw]">
-        <nav className="flex flex-col h-[70vh] w-[15vw] items-center justify-stretch gap-3">
+      <div className="md:hidden">
+        <GiHamburgerMenu
+          className="text-2xl cursor-pointer m-2"
+          onClick={toggleMenu}
+        />
+      </div>
+      <div
+        className={`${
+          menuOpen ? "block" : "hidden"
+        } md:block h-[89vh] bg-gray-950 w-[40vw] md:w-[15vw] z-10`}
+      >
+        <nav className="flex flex-col h-[70vh] w-36 md:w-[15vw] items-center justify-stretch gap-3">
           <div>
             <div
-              className="flex flex-row items-center justify-evenly gap-1 hover:bg-gray-700 w-[15vw] p-3 cursor-pointer mb-6"
+              className={`flex flex-row items-center justify-evenly gap-1 p-3 cursor-pointer mb-6 ${
+                selectedSection === "student"
+                  ? "bg-gray-700"
+                  : "hover:bg-gray-700"
+              }`}
               onClick={() => handleSectionClick("student")}
             >
-              <span>
-                <PiStudentBold className="text-xl"></PiStudentBold>
-              </span>
+              <PiStudentBold className="text-xl" />
               <h1 className="font-bold text-xl">Student Section</h1>
             </div>
-            <div className="w-[15vw] h-[15vh] flex flex-col justify-center items-center  mt-3 mb-3">
+            <div className="w-[15vw] h-[15vh] flex flex-col justify-center items-center mt-3 mb-3">
               <h2
-                className="cursor-pointer w-full flex items-center justify-center py-2 hover:bg-indigo-400 hover:text-black transition ease-in-out duration-100"
+                className={getMenuItemClass("addStudent")}
                 onClick={() => handleSectionClick("addStudent")}
               >
                 Add Student Details
               </h2>
               <h2
-                className="cursor-pointer w-full flex items-center justify-center py-2 hover:bg-indigo-400 hover:text-black transition ease-in-out duration-100"
+                className={getMenuItemClass("updateStudent")}
                 onClick={() => handleSectionClick("updateStudent")}
               >
                 Update Student Details
               </h2>
               <h2
-                className="cursor-pointer w-full flex items-center justify-center py-2 hover:bg-indigo-400 hover:text-black transition ease-in-out duration-100"
+                className={getMenuItemClass("showStudents")}
                 onClick={() => handleSectionClick("showStudents")}
               >
                 Show All Students
               </h2>
               <h2
-                className="cursor-pointer w-full flex items-center justify-center py-2 hover:bg-indigo-400 hover:text-black transition ease-in-out duration-100"
+                className={getMenuItemClass("filterStudents")}
                 onClick={() => handleSectionClick("filterStudents")}
               >
-                filterStudents
+                Filter Students
               </h2>
             </div>
           </div>
           <div>
             <div
-              className="flex flex-row items-center justify-evenly gap-1 hover:bg-gray-700 w-[15vw] p-3 cursor-pointer mb-6"
+              className={`flex flex-row items-center justify-evenly gap-1 p-3 cursor-pointer mb-6 ${
+                selectedSection === "professor"
+                  ? "bg-gray-700"
+                  : "hover:bg-gray-700"
+              }`}
               onClick={() => handleSectionClick("professor")}
             >
-              <span>
-                <FaChalkboardTeacher className="text-xl"></FaChalkboardTeacher>
-              </span>
+              <FaChalkboardTeacher className="text-xl" />
               <h1 className="font-bold text-xl">Professor Section</h1>
             </div>
             <div className="w-[15vw] h-[15vh] flex flex-col justify-center items-center gap-1">
               <h2
-                className="cursor-pointer w-full flex items-center justify-center py-2 hover:bg-indigo-400 hover:text-black transition ease-in-out duration-100"
+                className={getMenuItemClass("addProfessor")}
                 onClick={() => handleSectionClick("addProfessor")}
               >
                 Add Professor Details
               </h2>
               <h2
-                className="cursor-pointer w-full flex items-center justify-center py-2 hover:bg-indigo-400 hover:text-black transition ease-in-out duration-100"
+                className={getMenuItemClass("updateProfessor")}
                 onClick={() => handleSectionClick("updateProfessor")}
               >
                 Update Professor Details
               </h2>
               <h2
-                className="cursor-pointer w-full flex items-center justify-center py-2 hover:bg-indigo-400 hover:text-black transition ease-in-out duration-100"
+                className={getMenuItemClass("showProfessors")}
                 onClick={() => handleSectionClick("showProfessors")}
               >
                 Show All Professors
@@ -134,29 +158,31 @@ const Sidebar = () => {
           </div>
           <div>
             <div
-              className="flex flex-row items-center justify-evenly gap-1 hover:bg-gray-700 w-[15vw] p-3 cursor-pointer mb-2 "
+              className={`flex flex-row items-center justify-evenly gap-1 p-3 cursor-pointer mb-2 ${
+                selectedSection === "admin"
+                  ? "bg-gray-700"
+                  : "hover:bg-gray-700"
+              }`}
               onClick={() => handleSectionClick("admin")}
             >
-              <span>
-                <FaChalkboardTeacher className="text-xl"></FaChalkboardTeacher>
-              </span>
+              <FaChalkboardTeacher className="text-xl" />
               <h1 className="font-bold text-xl">Admin Section</h1>
             </div>
             <div className="w-[15vw] h-[15vh] flex flex-col justify-center items-center gap-1">
               <h2
-                className="cursor-pointer w-full flex items-center justify-center py-2 hover:bg-indigo-400 hover:text-black transition ease-in-out duration-100"
+                className={getMenuItemClass("addAdmin")}
                 onClick={() => handleSectionClick("addAdmin")}
               >
                 Add Admin Details
               </h2>
               <h2
-                className="cursor-pointer w-full flex items-center justify-center py-2 hover:bg-indigo-400 hover:text-black transition ease-in-out duration-100"
+                className={getMenuItemClass("showAdmins")}
                 onClick={() => handleSectionClick("showAdmins")}
               >
                 Show all Admins
               </h2>
               <h2
-                className="cursor-pointer w-full flex items-center justify-center py-2 hover:bg-indigo-400 hover:text-black transition ease-in-out duration-100"
+                className={getMenuItemClass("changePassword")}
                 onClick={() => handleSectionClick("changePassword")}
               >
                 Change Password
@@ -165,7 +191,7 @@ const Sidebar = () => {
           </div>
         </nav>
       </div>
-      <div>{renderContent()}</div>
+      <div className="flex-1">{renderContent()}</div>
     </div>
   );
 };

@@ -166,7 +166,7 @@ const StudentForm: React.FC = () => {
                 </span>
               </label>
               <input
-                type="number"
+                type="text"
                 {...register("passOutYear")}
                 className="w-full input input-bordered h-10"
               />

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
+import DropDown from "../DropDown";
 
 // Define the types for the form data
 interface StudentFormInputs {
@@ -118,35 +119,36 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
             )}
           </div>
 
-          <div>
-            <label className="label p-2">
-              <span className="text-base label-text text-white">Branch</span>
-            </label>
-            <input
-              {...register("branch", { required: "Branch is required" })}
-              className="w-full input input-bordered h-10"
-              placeholder="CSE"
-            />
-            {errors.branch && (
-              <p className="text-red-500">{errors.branch.message}</p>
-            )}
-          </div>
+          <DropDown
+            name="branch"
+            label="Branch"
+            options={[
+              "",
+              "BCA",
+              "BSC",
+              "BBA",
+              "BCOM",
+              "BA",
+              "MCA",
+              "BTech",
+              "MBA",
+            ]}
+            register={register}
+          />
 
-          <div>
-            <label className="label p-2">
-              <span className="text-base label-text text-white">
-                Department
-              </span>
-            </label>
-            <input
-              className="w-full input input-bordered h-10"
-              {...register("department")}
-              placeholder="Computer Science"
-            />
-            {errors.department && (
-              <p className="text-red-500">{errors.department.message}</p>
-            )}
-          </div>
+          <DropDown
+            name="department"
+            label="Department"
+            options={[
+              "",
+              "School of Computer Science",
+              "School of Management",
+              "School of Commerce",
+              "School of Fashion",
+              "School of LAW",
+            ]}
+            register={register}
+          />
 
           <div>
             <label className="label p-2">
@@ -206,7 +208,7 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
               </span>
             </label>
             <input
-              type="number"
+              type="text"
               className="w-full input input-bordered h-10"
               {...register("admissionYear")}
               placeholder="2020"
@@ -239,7 +241,7 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
               </span>
             </label>
             <input
-              type="number"
+              type="text"
               className="w-full input input-bordered h-10"
               {...register("passOutYear")}
               placeholder="2024"
@@ -362,51 +364,43 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
             )}
           </div>
 
-          <div>
-            <label className="label p-2">
-              <span className="text-base label-text text-white">Semester</span>
-            </label>
-            <input
-              className="w-full input input-bordered h-10"
-              {...register("semester")}
-              placeholder="5"
-            />
-            {errors.semester && (
-              <p className="text-red-500">{errors.semester.message}</p>
-            )}
-          </div>
+          <DropDown
+            name="semester"
+            label="Semester"
+            options={[
+              "",
+              "1st",
+              "2nd",
+              "3rd",
+              "4th",
+              "5th",
+              "6th",
+              "7th",
+              "8th",
+            ]}
+            register={register}
+          />
 
-          <div>
-            <label className="label p-2">
-              <span className="text-base label-text text-white">Section</span>
-            </label>
-            <input
-              className="w-full input input-bordered h-10"
-              {...register("section")}
-              placeholder="A"
-            />
-            {errors.section && (
-              <p className="text-red-500">{errors.section.message}</p>
-            )}
-          </div>
+          <DropDown
+            name="section"
+            label="Section"
+            options={["", "A", "B", "C", "D", "E", "F", "G", "h"]}
+            register={register}
+          />
 
-          <div>
-            <label className="label p-2">
-              <span className="text-base label-text text-white">
-                Subject in High School
-              </span>
-            </label>
-            <input
-              className="w-full input input-bordered h-10"
-              {...register("subjectinHighSchool")}
-              placeholder="Mathematics"
-            />
-            {errors.subjectinHighSchool && (
-              <p className="text-red-500">
-                {errors.subjectinHighSchool.message}
-              </p>
-            )}
-          </div>
+          <DropDown
+            name="subjectinHighSchool"
+            label="Subject in High School"
+            options={[
+              "",
+              "Commerce with CS",
+              "Commerce with math",
+              "PCM",
+              "PCB",
+              "PCBM",
+            ]}
+            register={register}
+          />
 
           <div>
             <label className="label p-2">
