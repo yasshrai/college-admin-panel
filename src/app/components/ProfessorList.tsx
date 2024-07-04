@@ -22,7 +22,10 @@ const ProfessorList: React.FC = () => {
     const fetchProfessors = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/professors/getall"
+          "http://localhost:4000/api/professors/getall",
+          {
+            withCredentials: true,
+          }
         );
         setProfessors(response.data);
         setLoading(false);
@@ -45,8 +48,8 @@ const ProfessorList: React.FC = () => {
   }
 
   return (
-    <div className="h-[89vh] w-[85vw] overflow-auto flex flex-col items-center p-4 bg-gray-900">
-      <div className="w-full md:w-[80%] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-900 mt-6 p-6">
+    <div className="h-[80vh] md:h-[89vh] w-[98vw] md:w-[85vw] overflow-auto flex flex-col items-center p-4 bg-gray-950">
+      <div className="w-full md:w-[80%] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-950 mt-6 p-6">
         <h1 className="text-2xl font-semibold text-center text-gray-300 mb-4">
           Professor <span className="text-blue-500">List</span>
         </h1>

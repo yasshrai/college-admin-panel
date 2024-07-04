@@ -69,7 +69,10 @@ const FilterableStudentList: React.FC = () => {
     try {
       const response = await axios.post(
         "http://localhost:4000/api/students/get/filter",
-        { filters: filteredFiltersObj }
+        { filters: filteredFiltersObj },
+        {
+          withCredentials: true,
+        }
       );
       setStudents(response.data);
       setLoading(false);
@@ -96,14 +99,17 @@ const FilterableStudentList: React.FC = () => {
   };
 
   return (
-    <div className="h-[89vh] w-[85vw] bg-gray-900 overflow-auto">
-      <div className="w-full md:w-[80%]   justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-900 mt-6 p-6">
+    <div className="h-[90vh] md:h-[89vh] w-[99vw] md:w-[85vw] bg-gray-950 overflow-auto">
+      <div className="w-full md:w-[80%]   justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-950 mt-6 p-6">
         <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 flex flex-col items-center">
           <h1 className="text-xl font-semibold text-center text-gray-300">
             Filter <span className="text-blue-500">Students</span>
           </h1>
 
-          <form onSubmit={handleSubmit(onSubmit)} className=" w-[40vw] ">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className=" md:w-[40vw] w-[70vw]"
+          >
             {/* Text Inputs */}
             <div>
               <label className="label p-2">

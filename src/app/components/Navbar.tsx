@@ -4,7 +4,7 @@ import { FaBuildingColumns } from "react-icons/fa6";
 
 const Navbar = () => {
   return (
-    <div className="w-full h-[10vh] bg-gray-950 p-10 flex flex-row items-center justify-evenly">
+    <div className="w-full h-[10vh] bg-black p-10 flex flex-row items-center justify-evenly">
       <div className=" flex flex-row gap-1 items-center justify-center">
         <span>
           <FaBuildingColumns className=" text-xl"></FaBuildingColumns>

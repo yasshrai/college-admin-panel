@@ -47,7 +47,7 @@ const Sidebar = () => {
         return <ProfessorList />;
       case "addAdmin":
         return (
-          <div className="h-[89vh] w-[85vw] bg-gray-900 flex items-center justify-center">
+          <div className="h-[80vh] md:h-[89vh] w-[98vw] md:w-[85vw] bg-gray-950 flex items-center justify-center">
             <div className="h-[80vh] w-[40vw]">
               <Signup heading="create another admin -" />
             </div>
@@ -65,28 +65,28 @@ const Sidebar = () => {
   const getMenuItemClass = (section: any) => {
     return `cursor-pointer w-full flex items-center justify-center py-2 transition ease-in-out duration-100 ${
       selectedSection === section
-        ? "bg-indigo-400 text-black"
-        : "hover:bg-indigo-400 hover:text-black"
+        ? "bg-slate-300 text-black"
+        : "hover:bg-slate-300 hover:text-black"
     }`;
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="md:flex flex-row  bg-gray-950">
       <div className="md:hidden">
         <GiHamburgerMenu
-          className="text-2xl cursor-pointer m-2"
+          className="text-2xl cursor-pointer "
           onClick={toggleMenu}
         />
       </div>
       <div
         className={`${
           menuOpen ? "block" : "hidden"
-        } md:block h-[89vh] bg-gray-950 w-[40vw] md:w-[15vw] z-10`}
+        } md:block h-[89vh] bg-black w-[99vw] md:w-[15vw] z-20 md:z-0 `}
       >
-        <nav className="flex flex-col h-[70vh] w-36 md:w-[15vw] items-center justify-stretch gap-3">
-          <div>
+        <nav className="flex  flex-col h-[70vh] w-full md:w-[15vw] items-center justify-stretch gap-3">
+          <div className=" w-full">
             <div
-              className={`flex flex-row items-center justify-evenly gap-1 p-3 cursor-pointer mb-6 ${
+              className={`flex flex-row items-center md:justify-evenly gap-1 p-3 cursor-pointer mb-6 ${
                 selectedSection === "student"
                   ? "bg-gray-700"
                   : "hover:bg-gray-700"
@@ -96,7 +96,7 @@ const Sidebar = () => {
               <PiStudentBold className="text-xl" />
               <h1 className="font-bold text-xl">Student Section</h1>
             </div>
-            <div className="w-[15vw] h-[15vh] flex flex-col justify-center items-center mt-3 mb-3">
+            <div className="w-full md:w-[15vw]  h-[15vh] flex flex-col justify-center items-center mt-3 mb-3 ">
               <h2
                 className={getMenuItemClass("addStudent")}
                 onClick={() => handleSectionClick("addStudent")}
@@ -123,9 +123,9 @@ const Sidebar = () => {
               </h2>
             </div>
           </div>
-          <div>
+          <div className=" w-full">
             <div
-              className={`flex flex-row items-center justify-evenly gap-1 p-3 cursor-pointer mb-6 ${
+              className={`flex flex-row items-center md:justify-evenly gap-1 p-3 cursor-pointer mb-6 ${
                 selectedSection === "professor"
                   ? "bg-gray-700"
                   : "hover:bg-gray-700"
@@ -133,9 +133,11 @@ const Sidebar = () => {
               onClick={() => handleSectionClick("professor")}
             >
               <FaChalkboardTeacher className="text-xl" />
-              <h1 className="font-bold text-xl">Professor Section</h1>
+              <h1 className="font-bold text-sm md:text-xl">
+                Professor Section
+              </h1>
             </div>
-            <div className="w-[15vw] h-[15vh] flex flex-col justify-center items-center gap-1">
+            <div className="w-full md:w-[15vw]  h-[15vh] flex flex-col justify-center items-center gap-1">
               <h2
                 className={getMenuItemClass("addProfessor")}
                 onClick={() => handleSectionClick("addProfessor")}
@@ -156,9 +158,9 @@ const Sidebar = () => {
               </h2>
             </div>
           </div>
-          <div>
+          <div className=" w-full">
             <div
-              className={`flex flex-row items-center justify-evenly gap-1 p-3 cursor-pointer mb-2 ${
+              className={`flex flex-row items-center md:justify-evenly gap-1 p-3 cursor-pointer mb-2 ${
                 selectedSection === "admin"
                   ? "bg-gray-700"
                   : "hover:bg-gray-700"
@@ -166,9 +168,9 @@ const Sidebar = () => {
               onClick={() => handleSectionClick("admin")}
             >
               <FaChalkboardTeacher className="text-xl" />
-              <h1 className="font-bold text-xl">Admin Section</h1>
+              <h1 className="font-bold text-sm md:text-xl">Admin Section</h1>
             </div>
-            <div className="w-[15vw] h-[15vh] flex flex-col justify-center items-center gap-1">
+            <div className="w-full md:w-[15vw] h-[15vh] flex flex-col justify-center items-center gap-1">
               <h2
                 className={getMenuItemClass("addAdmin")}
                 onClick={() => handleSectionClick("addAdmin")}

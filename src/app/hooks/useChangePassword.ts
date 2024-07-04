@@ -13,6 +13,7 @@ const useChangePassword = () => {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(adminData),
+          credentials: "include",
         }
       );
       const data = await res.json();

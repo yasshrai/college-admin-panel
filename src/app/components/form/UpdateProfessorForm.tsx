@@ -38,7 +38,9 @@ const UpdateProfessorForm: React.FC<UpdateProfessorFormProps> = ({
     const fetchProfessorData = async () => {
       try {
         const response = await axios.put(
-          `http://localhost:4000/api/professors/update/${professorId}`
+          `http://localhost:4000/api/professors/update/${professorId}`,
+          {},
+          { withCredentials: true }
         );
         const professor = response.data;
 
@@ -59,7 +61,10 @@ const UpdateProfessorForm: React.FC<UpdateProfessorFormProps> = ({
     try {
       await axios.put(
         `http://localhost:4000/api/professors/update/${professorId}`,
-        data
+        data,
+        {
+          withCredentials: true,
+        }
       );
       toast.success("Professor data updated successfully");
       reset();
@@ -86,7 +91,7 @@ const UpdateProfessorForm: React.FC<UpdateProfessorFormProps> = ({
   }
 
   return (
-    <div className="w-[80vw] md:w-[40vw] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-900">
+    <div className="w-[80vw] md:w-[40vw] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-950">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
         <h1 className="text-xl font-semibold text-center text-gray-300">
           Update <span className="text-blue-500">Professor</span>

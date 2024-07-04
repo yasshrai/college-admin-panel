@@ -33,6 +33,7 @@ const useSignup = () => {
           password,
           email,
         }),
+        credentials: "include",
       });
 
       const data = await res.json();

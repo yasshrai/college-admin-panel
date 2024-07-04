@@ -11,6 +11,7 @@ const useEnterProfessorData = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(professorData),
+        credentials: "include",
       });
       const data = await res.json();
       if (data.error) {
