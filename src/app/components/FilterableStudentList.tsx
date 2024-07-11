@@ -134,6 +134,7 @@ const FilterableStudentList: React.FC = () => {
                 "MCA",
                 "BTech",
                 "MBA",
+                "BARCH",
               ]}
               register={register}
             />
@@ -147,6 +148,7 @@ const FilterableStudentList: React.FC = () => {
                 "School of Commerce",
                 "School of Fashion",
                 "School of LAW",
+                "School of ARTS",
               ]}
               register={register}
             />

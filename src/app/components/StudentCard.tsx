@@ -35,61 +35,77 @@ const StudentCard: React.FC<{ student: Student }> = ({ student }) => {
       </div>
       <div className="flex-grow grid grid-cols-1 md:grid-cols-2 gap-4">
         <p className="text-gray-300">
-          <strong>Branch:</strong> {student.branch}
+          <strong className=" font-bold">Branch:</strong> {student.branch}
         </p>
         <p className="text-gray-300">
-          <strong>Department:</strong> {student.department}
+          <strong className=" font-bold">Department:</strong>{" "}
+          {student.department}
         </p>
         <p className="text-gray-300">
-          <strong>Roll Number:</strong> {student.rollNumber}
+          <strong className=" font-bold">Roll Number:</strong>{" "}
+          {student.rollNumber}
         </p>
         <p className="text-gray-300">
-          <strong>Scholar Number:</strong> {student.scholarNumber}
+          <strong className=" font-bold">Scholar Number:</strong>{" "}
+          {student.scholarNumber}
         </p>
         <p className="text-gray-300">
-          <strong>Enrollment Number:</strong> {student.enrollmentNumber}
+          <strong className=" font-bold">Enrollment Number:</strong>{" "}
+          {student.enrollmentNumber}
         </p>
         <p className="text-gray-300">
-          <strong>Admission Year:</strong> {student.admissionYear}
+          <strong className=" font-bold">Admission Year:</strong>{" "}
+          {student.admissionYear}
         </p>
         <p className="text-gray-300">
-          <strong>Pass Out Year:</strong> {student.passOutYear}
+          <strong className=" font-bold">Pass Out Year:</strong>{" "}
+          {student.passOutYear}
         </p>
         <p className="text-gray-300">
-          <strong>Mobile Number:</strong> {student.mobileNumber}
+          <strong className=" font-bold">Mobile Number:</strong>{" "}
+          {student.mobileNumber}
         </p>
         <p className="text-gray-300">
-          <strong>Email Address:</strong> {student.emailAddress}
+          <strong className=" font-bold">Email Address:</strong>{" "}
+          {student.emailAddress}
         </p>
         <p className="text-gray-300">
-          <strong>Father Name:</strong> {student.fatherName}
+          <strong className=" font-bold">Father Name:</strong>{" "}
+          {student.fatherName}
         </p>
         <p className="text-gray-300">
-          <strong>Mother Name:</strong> {student.motherName}
+          <strong className=" font-bold">Mother Name:</strong>{" "}
+          {student.motherName}
         </p>
         <p className="text-gray-300">
-          <strong>Residence Address:</strong> {student.residenceAddress}
+          <strong className=" font-bold">Residence Address:</strong>{" "}
+          {student.residenceAddress}
         </p>
         <p className="text-gray-300">
-          <strong>Parent Contact Number:</strong> {student.parentContectNumber}
+          <strong className=" font-bold">Parent Contact Number:</strong>{" "}
+          {student.parentContectNumber}
         </p>
         <p className="text-gray-300">
-          <strong>Semester:</strong> {student.semester}
+          <strong className=" font-bold">Semester:</strong> {student.semester}
         </p>
         <p className="text-gray-300">
-          <strong>Section:</strong> {student.section}
+          <strong className=" font-bold">Section:</strong> {student.section}
         </p>
         <p className="text-gray-300">
-          <strong>Subject in High School:</strong> {student.subjectinHighSchool}
+          <strong className=" font-bold">Subject in High School:</strong>{" "}
+          {student.subjectinHighSchool}
         </p>
         <p className="text-gray-300">
-          <strong>Regular:</strong> {student.regular ? "Yes" : "No"}
+          <strong className=" font-bold">Regular:</strong>{" "}
+          {student.regular ? "Yes" : "No"}
         </p>
         <p className="text-gray-300">
-          <strong>Bus Facility:</strong> {student.busFacility ? "Yes" : "No"}
+          <strong className=" font-bold">Bus Facility:</strong>{" "}
+          {student.busFacility ? "Yes" : "No"}
         </p>
         <p className="text-gray-300">
-          <strong>Achievements:</strong> {student.achivements}
+          <strong className=" font-bold">Achievements:</strong>{" "}
+          {student.achivements}
         </p>
       </div>
     </div>
