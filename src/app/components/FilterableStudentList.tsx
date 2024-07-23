@@ -1,9 +1,9 @@
-// FilterableStudentList.tsx
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import DropDown from "./DropDown";
 import StudentCard from "./StudentCard";
+import Modal from "react-modal";
 
 interface FilterFormInputs {
   name?: string;
@@ -46,6 +46,7 @@ interface Student {
   busFacility?: boolean;
   achievements?: string;
 }
+
 const FilterableStudentList: React.FC = () => {
   const { register, handleSubmit, reset } = useForm<FilterFormInputs>({
     defaultValues: {
@@ -58,13 +59,14 @@ const FilterableStudentList: React.FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
 
   const onSubmit: SubmitHandler<FilterFormInputs> = async (filters) => {
     setLoading(true);
     setError(null);
 
     const filteredFiltersObj = filteredFilters(filters);
-    console.log(filteredFiltersObj);
 
     try {
       const response = await axios.post(
@@ -98,9 +100,19 @@ const FilterableStudentList: React.FC = () => {
     }, {} as Partial<FilterFormInputs>);
   };
 
+  const openModal = (student: Student) => {
+    setSelectedStudent(student);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedStudent(null);
+    setModalIsOpen(false);
+  };
+
   return (
     <div className="h-[90vh] md:h-[89vh] w-[99vw] md:w-[85vw] bg-gray-950 overflow-auto">
-      <div className="w-full md:w-[80%]   justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-950 mt-6 p-6">
+      <div className="w-full md:w-[80%] justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-950 mt-6 p-6">
         <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 flex flex-col items-center">
           <h1 className="text-xl font-semibold text-center text-gray-300">
             Filter <span className="text-blue-500">Students</span>
@@ -108,7 +120,7 @@ const FilterableStudentList: React.FC = () => {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className=" md:w-[40vw] w-[70vw]"
+            className="md:w-[40vw] w-[70vw]"
           >
             {/* Text Inputs */}
             <div>
@@ -315,17 +327,41 @@ const FilterableStudentList: React.FC = () => {
             <p>No students found.</p>
           )}
           {!loading && !error && students.length > 0 && (
-            <div className="w-full md:w-[80%] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-900 mt-6 p-6">
-              <h1 className="text-2xl font-semibold text-center text-gray-300 mb-4">
-                Student <span className="text-blue-500">List</span>
-              </h1>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {students.map((student) => (
-                <StudentCard key={student.scholarNumber} student={student} />
+                <div
+                  key={student.scholarNumber}
+                  onClick={() => openModal(student)}
+                  className="cursor-pointer p-4 bg-gray-800 rounded-lg shadow-lg text-center text-white"
+                >
+                  <p>{student.name}</p>
+                  <p>{student.branch}</p>
+                </div>
               ))}
             </div>
           )}
         </div>
       </div>
+
+      {/* Modal */}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        className="flex justify-center items-center"
+        overlayClassName="fixed inset-0 bg-gray-800 bg-opacity-75"
+      >
+        {selectedStudent && (
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 text-gray-600"
+            >
+              Close
+            </button>
+            <StudentCard student={selectedStudent} />
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };
