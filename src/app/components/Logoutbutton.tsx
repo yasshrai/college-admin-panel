@@ -13,7 +13,7 @@ const LogoutButton = () => {
             className="text-xl md:text-2xl text-white cursor-pointer t"
             onClick={logout}
           />
-          <span className=" cursor-pointer">Logout</span>
+          <span className=" cursor-pointer text-white">Logout</span>
         </div>
       ) : (
         <span className="loading loading-spinner"></span>

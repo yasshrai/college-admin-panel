@@ -66,7 +66,7 @@ const Sidebar = () => {
     return `cursor-pointer w-full flex items-center justify-center py-2 transition ease-in-out duration-100 ${
       selectedSection === section
         ? "bg-slate-300 text-black"
-        : "hover:bg-slate-300 hover:text-black"
+        : "hover:bg-slate-300 hover:text-black text-white"
     }`;
   };
 
@@ -93,8 +93,8 @@ const Sidebar = () => {
               }`}
               onClick={() => handleSectionClick("student")}
             >
-              <PiStudentBold className="text-xl" />
-              <h1 className="font-bold text-xl">Student Section</h1>
+              <PiStudentBold className="text-xl text-white" />
+              <h1 className="font-bold text-xl text-white">Student Section</h1>
             </div>
             <div className="w-full md:w-[15vw]  h-[15vh] flex flex-col justify-center items-center mt-3 mb-3 ">
               <h2
@@ -132,8 +132,8 @@ const Sidebar = () => {
               }`}
               onClick={() => handleSectionClick("professor")}
             >
-              <FaChalkboardTeacher className="text-xl" />
-              <h1 className="font-bold text-sm md:text-xl">
+              <FaChalkboardTeacher className="text-xl text-white" />
+              <h1 className="font-bold text-sm md:text-xl text-white">
                 Professor Section
               </h1>
             </div>
@@ -167,8 +167,10 @@ const Sidebar = () => {
               }`}
               onClick={() => handleSectionClick("admin")}
             >
-              <FaChalkboardTeacher className="text-xl" />
-              <h1 className="font-bold text-sm md:text-xl">Admin Section</h1>
+              <FaChalkboardTeacher className="text-xl text-white" />
+              <h1 className="font-bold text-sm md:text-xl text-white">
+                Admin Section
+              </h1>
             </div>
             <div className="w-full md:w-[15vw] h-[15vh] flex flex-col justify-center items-center gap-1">
               <h2
