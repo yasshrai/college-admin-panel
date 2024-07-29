@@ -39,7 +39,7 @@ const StudentList: React.FC = () => {
     const fetchStudents = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/students/getall",
+          process.env.NEXT_PUBLIC_API_PORT + "/api/students/getall",
           {
             withCredentials: true,
           }

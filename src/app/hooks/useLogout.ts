@@ -12,11 +12,14 @@ const useLogout = () => {
     setLoading(true);
     const toastLogout = toast.loading("logging out");
     try {
-      const res = await fetch("http://localhost:4000/api/admin/logout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
+      const res = await fetch(
+        process.env.NEXT_PUBLIC_API_PORT + "/api/admin/logout",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        }
+      );
       const data = await res.json();
       if (data.error) {
         throw new Error(data.error);

@@ -17,7 +17,7 @@ const AdminList: React.FC = () => {
     const fetchAdmins = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/admin/getalladmin",
+          process.env.NEXT_PUBLIC_API_PORT + "/api/admin/getalladmin",
           { withCredentials: true }
         );
         setAdmins(response.data);

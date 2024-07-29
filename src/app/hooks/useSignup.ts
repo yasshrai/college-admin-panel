@@ -24,17 +24,20 @@ const useSignup = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:4000/api/admin/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          username,
-          password,
-          email,
-        }),
-        credentials: "include",
-      });
+      const res = await fetch(
+        process.env.NEXT_PUBLIC_API_PORT + "/api/admin/signup",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            username,
+            password,
+            email,
+          }),
+          credentials: "include",
+        }
+      );
 
       const data = await res.json();
       if (data.error) {

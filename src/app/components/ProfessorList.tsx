@@ -27,7 +27,7 @@ const ProfessorList: React.FC = () => {
     const fetchProfessors = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/professors/getall",
+          process.env.NEXT_PUBLIC_API_PORT + "/api/professors/getall",
           {
             withCredentials: true,
           }

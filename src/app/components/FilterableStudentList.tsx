@@ -70,7 +70,7 @@ const FilterableStudentList: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/students/get/filter",
+        process.env.NEXT_PUBLIC_API_PORT + "/api/students/get/filter",
         { filters: filteredFiltersObj },
         {
           withCredentials: true,

@@ -8,7 +8,7 @@ const useChangePassword = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        "http://localhost:4000/api/admin/changepassword",
+        process.env.NEXT_PUBLIC_API_PORT + "/api/admin/changepassword",
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

@@ -38,7 +38,7 @@ const UpdateProfessorForm: React.FC<UpdateProfessorFormProps> = ({
     const fetchProfessorData = async () => {
       try {
         const response = await axios.put(
-          `http://localhost:4000/api/professors/update/${professorId}`,
+          `${process.env.NEXT_PUBLIC_API_PORT}/api/professors/update/${professorId}`,
           {},
           { withCredentials: true }
         );

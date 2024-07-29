@@ -7,12 +7,15 @@ const useEnterProfessorData = () => {
   const createProfessor = async (professorData: any) => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:4000/api/professors/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(professorData),
-        credentials: "include",
-      });
+      const res = await fetch(
+        process.env.NEXT_PUBLIC_API_PORT + "/api/professors/create",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(professorData),
+          credentials: "include",
+        }
+      );
       const data = await res.json();
       if (data.error) {
         throw new Error(data.error);
