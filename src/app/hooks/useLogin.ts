@@ -14,7 +14,7 @@ const useLogin = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        process.env.NEXT_PUBLIC_API_PORT + "/api/admin/login",
+        process.env.NEXT_PUBLIC_API_PORT! + "/api/admin/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
