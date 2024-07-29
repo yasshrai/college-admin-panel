@@ -75,7 +75,7 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
   const onSubmit: SubmitHandler<StudentFormInputs> = async (data) => {
     try {
       await axios.put(
-        `http://localhost:4000/api/students/update/${scholarNumber}`,
+        `${process.env.NEXT_PUBLIC_API_PORT}/api/students/update/${scholarNumber}`,
         data,
         {
           withCredentials: true,
