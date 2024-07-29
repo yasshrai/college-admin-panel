@@ -184,7 +184,6 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
               {...register("scholarNumber", {
                 required: "Scholar Number is required",
               })}
-              placeholder="SCH12345"
               disabled
             />
             {errors.scholarNumber && (
@@ -201,7 +200,6 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
             <input
               className="w-full input input-bordered h-10"
               {...register("enrollmentNumber")}
-              placeholder="ENR12345"
             />
             {errors.enrollmentNumber && (
               <p className="text-red-500">{errors.enrollmentNumber.message}</p>
@@ -218,7 +216,6 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
               type="text"
               className="w-full input input-bordered h-10"
               {...register("admissionYear")}
-              placeholder="2020"
             />
             {errors.admissionYear && (
               <p className="text-red-500">{errors.admissionYear.message}</p>
@@ -251,7 +248,6 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
               type="text"
               className="w-full input input-bordered h-10"
               {...register("passOutYear")}
-              placeholder="2024"
             />
             {errors.passOutYear && (
               <p className="text-red-500">{errors.passOutYear.message}</p>
@@ -272,7 +268,6 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
                   message: "Mobile number must be 10 digits",
                 },
               })}
-              placeholder="9876543210"
             />
             {errors.mobileNumber && (
               <p className="text-red-500">{errors.mobileNumber.message}</p>
@@ -293,7 +288,6 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
                   message: "Email address is invalid",
                 },
               })}
-              placeholder="john.doe@example.com"
             />
             {errors.emailAddress && (
               <p className="text-red-500">{errors.emailAddress.message}</p>
@@ -309,7 +303,6 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
             <input
               className="w-full input input-bordered h-10"
               {...register("fatherName")}
-              placeholder="Mr. Doe"
             />
             {errors.fatherName && (
               <p className="text-red-500">{errors.fatherName.message}</p>
@@ -325,7 +318,6 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
             <input
               className="w-full input input-bordered h-10"
               {...register("motherName")}
-              placeholder="Mrs. Doe"
             />
             {errors.motherName && (
               <p className="text-red-500">{errors.motherName.message}</p>
@@ -341,7 +333,6 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
             <input
               className="w-full input input-bordered h-10"
               {...register("residenceAddress")}
-              placeholder="1234 Elm Street"
             />
             {errors.residenceAddress && (
               <p className="text-red-500">{errors.residenceAddress.message}</p>
@@ -362,7 +353,6 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
                   message: "Parent contact number must be 10 digits",
                 },
               })}
-              placeholder="9876543210"
             />
             {errors.parentContactNumber && (
               <p className="text-red-500">
@@ -448,7 +438,6 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
             <input
               className="w-full input input-bordered h-10"
               {...register("achievements")}
-              placeholder="Achievements"
             />
             {errors.achievements && (
               <p className="text-red-500">{errors.achievements.message}</p>
