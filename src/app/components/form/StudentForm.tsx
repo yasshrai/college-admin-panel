@@ -3,13 +3,16 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useEnterStudentData from "@/app/hooks/useEnterStudentData";
 import DropDown from "../DropDown";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 type StudentFormInputs = {
   name: string;
   branch: string;
   department?: string;
   rollNumber?: string;
-  scholarNumber?: string;
+  scholarNumber: string;
   enrollmentNumber?: string;
   admissionYear?: number;
   leaveUniversity?: boolean;
@@ -33,14 +36,30 @@ const StudentForm: React.FC = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<StudentFormInputs>();
   const { loading, createStudent } = useEnterStudentData();
+  const [scholarNumber, setScholarNumber] = useState<string>("");
 
   const onSubmit: SubmitHandler<StudentFormInputs> = async (data) => {
     const success = await createStudent(data);
     if (success) {
       reset();
+    }
+  };
+  const generateRandomScholarNumber = async () => {
+    try {
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_API_PORT +
+          "/api/students/get/uniquescholarnumber",
+        { withCredentials: true }
+      );
+      const newScholarNumber = response.data.scholarNumber;
+      setScholarNumber(newScholarNumber); // Update the state
+      setValue("scholarNumber", newScholarNumber); // Update the form value
+    } catch (err) {
+      toast.error("Error while generating scholar number");
     }
   };
 
@@ -108,7 +127,6 @@ const StudentForm: React.FC = () => {
                 className="w-full input input-bordered h-10"
               />
             </div>
-
             <div>
               <label className="label p-2">
                 <span className="text-base label-text text-white">
@@ -116,9 +134,23 @@ const StudentForm: React.FC = () => {
                 </span>
               </label>
               <input
-                {...register("scholarNumber")}
+                {...register("scholarNumber", {
+                  required: "Scholar Number is required",
+                })}
                 className="w-full input input-bordered h-10"
+                value={scholarNumber} // Bind state value to input field
+                onChange={(e) => setScholarNumber(e.target.value)} // Update state on change
               />
+              {errors.scholarNumber && (
+                <p className="text-red-500">{errors.scholarNumber.message}</p>
+              )}
+              <button
+                type="button"
+                onClick={generateRandomScholarNumber}
+                className="btn mt-2 hover:bg-blue-700 hover:text-white transition ease-in-out duration-75"
+              >
+                Generate Unique Scholar Number
+              </button>
             </div>
 
             <div>

@@ -347,7 +347,7 @@ const FilterableStudentList: React.FC = () => {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        className="flex justify-center items-center"
+        className="flex justify-center items-center overflow-auto"
         overlayClassName="fixed inset-0 bg-gray-800 bg-opacity-75"
       >
         {selectedStudent && (
