@@ -324,7 +324,7 @@ const FilterableStudentList: React.FC = () => {
           {loading && <p>Loading...</p>}
           {error && <p className="text-red-500">{error}</p>}
           {!loading && !error && students.length === 0 && (
-            <p>No students found.</p>
+            <p className="text-white">No students found.</p>
           )}
           {!loading && !error && students.length > 0 && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -348,17 +348,17 @@ const FilterableStudentList: React.FC = () => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         className="flex justify-center items-center overflow-auto"
-        overlayClassName="fixed inset-0 bg-gray-800 bg-opacity-75"
+        overlayClassName="fixed inset-0 bg-gray-800 bg-opacity-75  overflow-auto"
       >
         {selectedStudent && (
           <div className="bg-white p-6 rounded-lg shadow-lg">
+            <StudentCard student={selectedStudent} />
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-gray-600"
+              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
             >
               Close
             </button>
-            <StudentCard student={selectedStudent} />
           </div>
         )}
       </Modal>

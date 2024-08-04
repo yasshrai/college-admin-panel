@@ -98,7 +98,7 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
       <div className=" w-full h-full flex items-start justify-center  gap-2">
         <h1 className=" text-white font-bold text-center text-3xl">{error}</h1>
         <h1 className=" text-white font-bold text-center text-3xl">
-          please chech the details
+          please check the details
         </h1>
       </div>
     );

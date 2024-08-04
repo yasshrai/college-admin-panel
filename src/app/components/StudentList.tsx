@@ -96,8 +96,8 @@ const StudentList: React.FC = () => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Student Modal"
-        className="fixed inset-0 flex items-center justify-center z-50 overflow-auto p-14 "
-        overlayClassName="fixed inset-0 bg-black bg-opacity-75 z-40"
+        className="flex justify-center items-center overflow-auto"
+        overlayClassName="fixed inset-0 bg-gray-800 bg-opacity-75  overflow-auto"
       >
         <div className="bg-white rounded-lg shadow-lg p-6 max-w-2xl w-full">
           {selectedStudent && <StudentCard student={selectedStudent} />}

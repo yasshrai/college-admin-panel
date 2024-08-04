@@ -40,7 +40,7 @@ const AdminList: React.FC = () => {
   }
 
   return (
-    <div className="h-[80vh] md:h-[89vh] w-[98vw] md:w-[85vw] overflow-auto flex flex-col items-center p-4 bg-gray-950">
+    <div className="h-[88vh] md:h-[89vh] w-[94vw] md:w-[85vw] overflow-auto flex flex-col items-center p-4 bg-gray-950">
       <div className="w-full md:w-[80%] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-950 mt-6 p-6">
         <h1 className="text-2xl font-semibold text-center text-gray-300 mb-4">
           Admin <span className="text-blue-500">List</span>
