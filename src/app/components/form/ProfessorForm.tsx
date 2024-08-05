@@ -1,9 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useEnterProfessorData from "@/app/hooks/useEnterProfessorData";
 import DropDown from "../DropDown";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 type ProfessorFormInputs = {
   name: string;
@@ -21,13 +23,31 @@ const ProfessorForm: React.FC = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<ProfessorFormInputs>();
   const { loading, createProfessor } = useEnterProfessorData();
+  const [professorId, setProfessorId] = useState<string>();
   const onSubmit: SubmitHandler<ProfessorFormInputs> = async (data) => {
     const success = await createProfessor(data);
     if (success) {
       reset();
+      setProfessorId("");
+    }
+  };
+  const generateRandomProfessorId = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_PORT}/api/professors//get/uniqueprofessorid`,
+        {
+          withCredentials: true,
+        }
+      );
+      const newProfessorID = response.data.professorId;
+      setProfessorId(newProfessorID);
+      setValue("professorId", newProfessorID);
+    } catch (error) {
+      toast.error("Error while generating professorID");
     }
   };
 
@@ -102,10 +122,19 @@ const ProfessorForm: React.FC = () => {
               <input
                 className="w-full input input-bordered h-10"
                 {...register("professorId")}
+                value={professorId}
+                onChange={(e) => setProfessorId(e.target.value)}
               />
               {errors.professorId && (
                 <p className="text-red-500">{errors.professorId.message}</p>
               )}
+              <button
+                type="button"
+                onClick={generateRandomProfessorId}
+                className="btn mt-2 hover:bg-blue-700 hover:text-white transition ease-in-out duration-75"
+              >
+                Generate Unique ProfessorID
+              </button>
             </div>
 
             <div>
