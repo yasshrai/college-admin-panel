@@ -27,7 +27,7 @@ const UpdateStudentRender = () => {
 
   return (
     <>
-      <div className="h-[90vh] md:h-[89vh] w-[99vw] md:w-[85vw] bg-gray-950 overflow-auto flex flex-col items-center">
+      <div className="h-[90vh] md:h-[89vh] w-[99vw] md:w-[85vw] bg-zinc-900 overflow-auto flex flex-col items-center">
         <div className="w-[80vw] md:w-[40vw] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg ">
           <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -59,7 +59,7 @@ const UpdateStudentRender = () => {
         </div>
 
         {submittedscholarNumber && (
-          <div className="h-[89vh] w-[99vw] md:w-[83vw] bg-gray-950">
+          <div className="h-[89vh] w-[99vw] md:w-[83vw] bg-zinc-900">
             <UpdateStudentForm
               key={submittedscholarNumber}
               scholarNumber={submittedscholarNumber}

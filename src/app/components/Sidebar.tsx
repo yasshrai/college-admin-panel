@@ -47,7 +47,7 @@ const Sidebar = () => {
         return <ProfessorList />;
       case "addAdmin":
         return (
-          <div className="h-[85vh] md:h-[89vh] w-[98vw] md:w-[85vw] bg-gray-950 flex items-center justify-center">
+          <div className="h-[85vh] md:h-[89vh] w-[98vw] md:w-[85vw] bg-zinc-900 flex items-center justify-center">
             <div>
               <Signup heading="create another admin -" />
             </div>
@@ -71,8 +71,8 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="md:flex flex-row  bg-gray-950">
-      <div className="md:hidden w-full bg-black ">
+    <div className="md:flex flex-row  bg-zinc-900 ">
+      <div className="md:hidden w-full bg-neutral-950  ">
         <GiHamburgerMenu
           className="text-2xl cursor-pointer text-white "
           onClick={toggleMenu}
@@ -81,7 +81,7 @@ const Sidebar = () => {
       <div
         className={`${
           menuOpen ? "block" : "hidden"
-        } md:block h-[89vh] bg-black w-[99vw]  md:w-[30vw] z-20 md:z-0 `}
+        } md:block h-[89vh] bg-neutral-950 w-[99vw]  md:w-[30vw] z-20 md:z-0 `}
       >
         <nav className="flex  flex-col h-[70vh] w-full md:w-[15vw] items-center justify-stretch gap-3">
           <div className=" w-full">

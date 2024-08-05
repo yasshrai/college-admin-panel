@@ -28,7 +28,7 @@ export default function Signup({ heading }: any) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-w-96 mx-auto  rounded-lg  shadow-lg bg-gray-950">
+    <div className="flex flex-col items-center justify-center min-w-96 mx-auto  rounded-lg  shadow-lg bg-zinc-900 ">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
         <h1 className="text-xl font-semibold text-center text-gray-300">
           {heading} <span className="text-blue-500"> college admin panel</span>

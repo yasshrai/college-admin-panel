@@ -26,7 +26,7 @@ interface Student {
 
 const StudentCard: React.FC<{ student: Student }> = ({ student }) => {
   return (
-    <div className="bg-gray-900 p-4 rounded-lg shadow-md mb-4 flex flex-col lg:flex-row">
+    <div className="bg-zinc-900 p-4 rounded-lg shadow-md mb-4 flex flex-col lg:flex-row">
       <div className="flex-shrink-0 mb-4 lg:mb-0 lg:mr-4">
         <h2 className="text-2xl font-semibold text-blue-500">{student.name}</h2>
         {student.leaveUniversity && (

@@ -111,8 +111,8 @@ const FilterableStudentList: React.FC = () => {
   };
 
   return (
-    <div className="h-[90vh] md:h-[89vh] w-[99vw] md:w-[85vw] bg-gray-950 overflow-auto">
-      <div className="w-full md:w-[80%] justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-950 mt-6 p-6">
+    <div className="h-[90vh] md:h-[89vh] w-[99vw] md:w-[85vw] bg-zinc-900 overflow-auto">
+      <div className="w-full md:w-[80%] justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-zinc-900 mt-6 p-6">
         <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 flex flex-col items-center">
           <h1 className="text-xl font-semibold text-center text-gray-300">
             Filter <span className="text-blue-500">Students</span>
@@ -332,7 +332,7 @@ const FilterableStudentList: React.FC = () => {
                 <div
                   key={student.scholarNumber}
                   onClick={() => openModal(student)}
-                  className="cursor-pointer p-4 bg-gray-800 rounded-lg shadow-lg text-center text-white"
+                  className="cursor-pointer p-4 bg-zinc-800 rounded-lg shadow-lg text-center text-white"
                 >
                   <p>{student.name}</p>
                   <p>{student.branch}</p>
@@ -348,10 +348,10 @@ const FilterableStudentList: React.FC = () => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         className="flex justify-center items-center overflow-auto"
-        overlayClassName="fixed inset-0 bg-gray-800 bg-opacity-75  overflow-auto"
+        overlayClassName="fixed inset-0 bg-neutral-950 bg-opacity-75  overflow-auto"
       >
         {selectedStudent && (
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+          <div className="bg-neutral-950 p-6 rounded-lg shadow-lg">
             <StudentCard student={selectedStudent} />
             <button
               onClick={closeModal}

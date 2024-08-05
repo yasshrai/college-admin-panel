@@ -74,8 +74,8 @@ const StudentList: React.FC = () => {
   }
 
   return (
-    <div className="h-[90vh] md:h-[89vh] w-[99vw] md:w-[85vw] bg-gray-950 overflow-auto flex flex-col items-center p-4">
-      <div className="w-full md:w-[80%] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-gray-950 mt-6 p-6">
+    <div className="h-[90vh] md:h-[89vh] w-[99vw] md:w-[85vw] bg-zinc-900 overflow-auto flex flex-col items-center p-4">
+      <div className="w-full md:w-[80%] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-zinc-900 mt-6 p-6">
         <h1 className="text-2xl font-semibold text-center text-gray-300 mb-4">
           Student <span className="text-blue-500">List</span>
         </h1>
@@ -83,7 +83,7 @@ const StudentList: React.FC = () => {
           {students.map((student) => (
             <div
               key={student.scholarNumber}
-              className="p-4 bg-gray-800 rounded-lg cursor-pointer"
+              className="p-4 bg-zinc-800 rounded-lg cursor-pointer"
               onClick={() => openModal(student)}
             >
               <h2 className="text-lg text-gray-300">{student.name}</h2>
@@ -97,9 +97,9 @@ const StudentList: React.FC = () => {
         onRequestClose={closeModal}
         contentLabel="Student Modal"
         className="flex justify-center items-center overflow-auto"
-        overlayClassName="fixed inset-0 bg-gray-800 bg-opacity-75  overflow-auto"
+        overlayClassName="fixed inset-0 bg-neutral-950 bg-opacity-75  overflow-auto"
       >
-        <div className="bg-white rounded-lg shadow-lg p-6 max-w-2xl w-full">
+        <div className="bg-neutral-950 rounded-lg shadow-lg p-6 max-w-2xl w-full">
           {selectedStudent && <StudentCard student={selectedStudent} />}
           <button
             onClick={closeModal}
