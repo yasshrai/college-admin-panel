@@ -66,7 +66,11 @@ const StudentList: React.FC = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="h-[90vh] md:h-[89vh] w-[99vw] md:w-[85vw]">
+        Loading...
+      </div>
+    );
   }
 
   if (error) {

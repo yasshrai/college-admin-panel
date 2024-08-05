@@ -32,11 +32,19 @@ const AdminList: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="h-[90vh] md:h-[89vh] w-[99vw] md:w-[85vw] text-white text-xl">
+        Loading...
+      </div>
+    );
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return (
+      <div className="h-[90vh] md:h-[89vh] w-[99vw] md:w-[85vw] text-white text-xl">
+        {error}
+      </div>
+    );
   }
 
   return (
