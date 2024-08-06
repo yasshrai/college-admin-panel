@@ -2,6 +2,14 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../context/authContext";
 import { useRouter } from "next/navigation";
+
+interface UserDetails {
+  name: string;
+  username: string;
+  password: string;
+  confirmPassword: string;
+  email: string;
+}
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -12,7 +20,7 @@ const useSignup = () => {
     password,
     confirmPassword,
     email,
-  }: any) => {
+  }: UserDetails) => {
     const success = handleInputErrors({
       name,
       username,

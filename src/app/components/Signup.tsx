@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import useSignup from "../hooks/useSignup";
 
 export default function Signup({ heading }: any) {

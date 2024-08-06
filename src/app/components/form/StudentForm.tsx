@@ -7,7 +7,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
 
-type StudentFormInputs = {
+export type StudentFormInputs = {
   name: string;
   branch: string;
   department?: string;

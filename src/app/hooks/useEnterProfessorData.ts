@@ -1,10 +1,11 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { ProfessorFormData } from "../components/form/UpdateProfessorForm";
 
 const useEnterProfessorData = () => {
   const [loading, setLoading] = useState(false);
 
-  const createProfessor = async (professorData: any) => {
+  const createProfessor = async (professorData: ProfessorFormData) => {
     setLoading(true);
     try {
       const res = await fetch(

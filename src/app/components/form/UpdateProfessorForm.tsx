@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import DropDown from "../DropDown";
 
 // Define the types for the form data
-interface ProfessorFormData {
+export interface ProfessorFormData {
   name: string;
   age: number;
   department: string;
