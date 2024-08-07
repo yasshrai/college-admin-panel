@@ -20,12 +20,12 @@ const Navbar = () => {
               aria-label="User Avatar"
             />
             <h1 className=" text-white">{authUser.username}</h1>
-            <div className="absolute top-10 left-0 hidden mb-8 w-56 p-4 bg-neutral-900 text-white rounded-lg shadow-lg group-hover:block">
+            <div className="absolute top-10 left-0 hidden mb-8 w-56 p-4 bg-neutral-900 text-white rounded-lg shadow-lg group-hover:block z-50">
               <p>
-                <strong>Fullname:</strong> {authUser.name}
+                <strong className="pr-2">Fullname:</strong> {authUser.name}
               </p>
               <p>
-                <strong>email:</strong> {authUser.email}
+                <strong className="pr-2">email:</strong> {authUser.email}
               </p>
             </div>
           </div>
