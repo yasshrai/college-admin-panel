@@ -88,15 +88,41 @@ const StudentList: React.FC = () => {
         <h1 className="text-2xl font-semibold text-center text-gray-300 mb-4">
           Student <span className="text-blue-500">List</span>
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="flex flex-col gap-1 ">
           {students.map((student) => (
             <div
               key={student.scholarNumber}
-              className="p-4 bg-zinc-800 rounded-lg cursor-pointer"
+              className="p-4 bg-zinc-800  cursor-pointer flex flex-row gap-5 justify-self-stretch"
               onClick={() => openModal(student)}
             >
-              <h2 className="text-lg text-gray-300">{student.name}</h2>
-              <p className="text-sm text-gray-400">{student.branch}</p>
+              <div className=" flex flex-row gap-2">
+                <span className=" hidden md:block text-lg font-bold text-white">
+                  Name:
+                </span>
+                <p className="text-lg text-white">{student.name}</p>
+              </div>
+              <div className=" flex flex-row gap-2">
+                <span className=" hidden md:block text-lg font-bold text-white">
+                  Branch:
+                </span>
+
+                <p className="text-lg text-white">{student.branch}</p>
+              </div>
+
+              <div className=" flex flex-row gap-2">
+                <span className="  hidden md:block text-lg font-bold text-white">
+                  scholarNumber:
+                </span>
+                <p className="text-lg text-white">{student.scholarNumber}</p>
+              </div>
+              <div className=" flex flex-row gap-2">
+                <span className=" hidden md:block text-lg font-bold text-white">
+                  mobileNumber:
+                </span>
+
+                <p className="text-lg text-white">{student.mobileNumber}</p>
+              </div>
+              {student.leaveUniversity && <p className="text-red-500">❌</p>}
             </div>
           ))}
         </div>
