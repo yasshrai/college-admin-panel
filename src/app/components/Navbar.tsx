@@ -15,8 +15,11 @@ const Navbar = () => {
         <LogoutButton />
         {authUser && (
           <div className="relative flex items-center gap-1 group">
-            <RxAvatar className="text-2xl" aria-label="User Avatar" />
-            <h1>{authUser.username}</h1>
+            <RxAvatar
+              className="text-2xl text-white"
+              aria-label="User Avatar"
+            />
+            <h1 className=" text-white">{authUser.username}</h1>
             <div className="absolute top-10 left-0 hidden mb-8 w-56 p-4 bg-neutral-900 text-white rounded-lg shadow-lg group-hover:block">
               <p>
                 <strong>Fullname:</strong> {authUser.name}
