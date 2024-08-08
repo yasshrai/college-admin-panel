@@ -96,10 +96,9 @@ const StudentList: React.FC = () => {
               onClick={() => openModal(student)}
             >
               <div className=" flex flex-row gap-2">
-                <span className=" hidden md:block text-lg font-bold text-white">
-                  Name:
-                </span>
-                <p className="text-lg text-white">{student.name}</p>
+                <p className="text-xl font-semibold text-blue-600">
+                  {student.name}
+                </p>
               </div>
               <div className=" flex flex-row gap-2">
                 <span className=" hidden md:block text-lg font-bold text-white">
