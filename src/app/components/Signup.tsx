@@ -10,6 +10,7 @@ export default function Signup({ heading }: any) {
     password: "",
     confirmPassword: "",
     email: "",
+    followUp: "",
   });
 
   const { loading, signup } = useSignup();
@@ -23,6 +24,7 @@ export default function Signup({ heading }: any) {
       password: "",
       confirmPassword: "",
       email: "",
+      followUp: "",
     });
   };
 
@@ -103,6 +105,22 @@ export default function Signup({ heading }: any) {
               className="w-full input input-bordered h-10"
               value={inputs.email}
               onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
+            />
+          </div>
+          <div>
+            <label className="label">
+              <span className="text-base label-text text-white">
+                who is your favourite superhero?
+              </span>
+            </label>
+            <input
+              type="text"
+              placeholder="superhero"
+              className="w-full input input-bordered h-10"
+              value={inputs.followUp}
+              onChange={(e) =>
+                setInputs({ ...inputs, followUp: e.target.value })
+              }
             />
           </div>
 

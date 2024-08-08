@@ -1,10 +1,10 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-
+import { ChangePasswordInput } from "../components/form/ChangePasswordForm";
 const useChangePassword = () => {
   const [loading, setLoading] = useState(false);
 
-  const changePassword = async (adminData: any) => {
+  const changePassword = async (adminData: ChangePasswordInput) => {
     setLoading(true);
     try {
       const res = await fetch(

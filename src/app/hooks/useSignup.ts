@@ -1,6 +1,5 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useAuthContext } from "../context/authContext";
 import { useRouter } from "next/navigation";
 
 interface UserDetails {
@@ -9,6 +8,7 @@ interface UserDetails {
   password: string;
   confirmPassword: string;
   email: string;
+  followUp: string;
 }
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
@@ -20,6 +20,7 @@ const useSignup = () => {
     password,
     confirmPassword,
     email,
+    followUp,
   }: UserDetails) => {
     const success = handleInputErrors({
       name,
@@ -27,6 +28,7 @@ const useSignup = () => {
       password,
       confirmPassword,
       email,
+      followUp,
     });
     if (!success) return;
 
@@ -42,6 +44,7 @@ const useSignup = () => {
             username,
             password,
             email,
+            followUp,
           }),
           credentials: "include",
         }
@@ -79,8 +82,16 @@ function handleInputErrors({
   password,
   confirmPassword,
   email,
-}: any) {
-  if (!name || !username || !password || !confirmPassword || !email) {
+  followUp,
+}: UserDetails) {
+  if (
+    !name ||
+    !username ||
+    !password ||
+    !confirmPassword ||
+    !email ||
+    !followUp
+  ) {
     toast.error("enter all fields");
     return false;
   }
