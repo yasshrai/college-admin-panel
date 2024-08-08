@@ -34,6 +34,7 @@ interface Student {
   name: string;
   branch: string;
   department?: string;
+  mobileNumber: string;
   rollNumber?: string;
   enrollmentNumber?: string;
   admissionYear?: number;
@@ -327,15 +328,44 @@ const FilterableStudentList: React.FC = () => {
             <p className="text-white">No students found.</p>
           )}
           {!loading && !error && students.length > 0 && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="flex flex-col gap-1">
               {students.map((student) => (
                 <div
                   key={student.scholarNumber}
                   onClick={() => openModal(student)}
-                  className="cursor-pointer p-4 bg-zinc-800 rounded-lg shadow-lg text-center text-white"
+                  className="p-4 bg-zinc-800  cursor-pointer flex flex-row gap-5 justify-self-stretch"
                 >
-                  <p>{student.name}</p>
-                  <p>{student.branch}</p>
+                  <div className=" flex flex-row gap-2">
+                    <p className="text-xl font-semibold text-blue-600">
+                      {student.name}
+                    </p>
+                  </div>
+                  <div className=" flex flex-row gap-2">
+                    <span className=" hidden md:block text-lg font-bold text-white">
+                      Branch:
+                    </span>
+
+                    <p className="text-lg text-white">{student.branch}</p>
+                  </div>
+
+                  <div className=" flex flex-row gap-2">
+                    <span className="  hidden md:block text-lg font-bold text-white">
+                      scholarNumber:
+                    </span>
+                    <p className="text-lg text-white">
+                      {student.scholarNumber}
+                    </p>
+                  </div>
+                  <div className=" hidden md:flex flex-row gap-2">
+                    <span className=" hidden md:block text-lg font-bold text-white">
+                      mobileNumber:
+                    </span>
+
+                    <p className="text-lg text-white">{student.mobileNumber}</p>
+                  </div>
+                  {student.leaveUniversity && (
+                    <p className="text-red-500">❌</p>
+                  )}
                 </div>
               ))}
             </div>
