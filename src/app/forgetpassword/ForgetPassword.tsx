@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import useForgetPassword from "../hooks/useForgetPassword";
 import toast from "react-hot-toast";
+import { IoEyeOutline } from "react-icons/io5";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 const validatePassword = (newPassword: string, confirmPassword: string) => {
   if (newPassword.length < 8) {
@@ -24,6 +26,9 @@ const ForgetPassword = () => {
   const [followUp, setFollowUp] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const { loading, forgetPassword } = useForgetPassword();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setConfirmShowPassword] =
+    useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -75,13 +80,25 @@ const ForgetPassword = () => {
             <label className="label">
               <span className="text-base label-text text-white">Password</span>
             </label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              className="w-full input input-bordered h-10"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter Password"
+                className="w-full input input-bordered h-10"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+              <div
+                className="absolute inset-y-0 right-0 top-0 flex items-center pr-3 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <FaRegEyeSlash className="text-black dark:text-white text-xl" />
+                ) : (
+                  <IoEyeOutline className="text-black dark:text-white text-xl" />
+                )}
+              </div>
+            </div>
           </div>
           <div>
             <label className="label">
@@ -89,13 +106,25 @@ const ForgetPassword = () => {
                 Confirm Password
               </span>
             </label>
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              className="w-full input input-bordered h-10"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+            <div className=" relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                className="w-full input input-bordered h-10"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <div
+                className="absolute inset-y-0 right-0 top-0 flex items-center pr-3 cursor-pointer"
+                onClick={() => setConfirmShowPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? (
+                  <FaRegEyeSlash className="text-black dark:text-white text-xl" />
+                ) : (
+                  <IoEyeOutline className="text-black dark:text-white text-xl" />
+                )}
+              </div>
+            </div>
           </div>
 
           <Link
