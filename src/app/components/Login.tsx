@@ -3,10 +3,13 @@
 import { useState } from "react";
 import useLogin from "../hooks/useLogin";
 import Link from "next/link";
+import { IoEyeOutline } from "react-icons/io5";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showpassword, setShowPassword] = useState<boolean>(false);
   const { loading, login } = useLogin();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -35,18 +38,29 @@ const Login = () => {
             />
           </div>
 
-          <div>
-            <label className="label">
-              <span className="text-base label-text text-white">Password</span>
-            </label>
+          <label className="label">
+            <span className="text-base label-text text-white">Password</span>
+          </label>
+          <div className="relative">
             <input
-              type="password"
+              type={showpassword ? "text" : "password"}
               placeholder="Enter Password"
-              className="w-full input input-bordered h-10"
+              className="w-full input input-bordered h-10 pr-10" // Add padding to the right to make space for the icon
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <div
+              className="absolute inset-y-0 right-0 top-0 flex items-center pr-3 cursor-pointer"
+              onClick={() => setShowPassword(!showpassword)}
+            >
+              {showpassword ? (
+                <FaRegEyeSlash className="text-black dark:text-white text-xl" />
+              ) : (
+                <IoEyeOutline className="text-black dark:text-white text-xl" />
+              )}
+            </div>
           </div>
+
           <Link
             href="/forgetpassword"
             className="text-sm  hover:underline hover:text-blue-600 mt-2 inline-block text-white"
