@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import useSignup from "../hooks/useSignup";
+import { IoEyeOutline } from "react-icons/io5";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 export default function Signup({ heading }: any) {
   const [inputs, setInputs] = useState({
@@ -14,6 +16,9 @@ export default function Signup({ heading }: any) {
   });
 
   const { loading, signup } = useSignup();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setConfirmShowPassword] =
+    useState<boolean>(false);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -68,15 +73,27 @@ export default function Signup({ heading }: any) {
             <label className="label">
               <span className="text-base label-text text-white">Password</span>
             </label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              className="w-full input input-bordered h-10"
-              value={inputs.password}
-              onChange={(e) =>
-                setInputs({ ...inputs, password: e.target.value })
-              }
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter Password"
+                className="w-full input input-bordered h-10"
+                value={inputs.password}
+                onChange={(e) =>
+                  setInputs({ ...inputs, password: e.target.value })
+                }
+              />
+              <div
+                className="absolute inset-y-0 right-0 top-0 flex items-center pr-3 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <FaRegEyeSlash className="text-black dark:text-white text-xl" />
+                ) : (
+                  <IoEyeOutline className="text-black dark:text-white text-xl" />
+                )}
+              </div>
+            </div>
           </div>
 
           <div>
@@ -85,15 +102,27 @@ export default function Signup({ heading }: any) {
                 Confirm Password
               </span>
             </label>
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              className="w-full input input-bordered h-10"
-              value={inputs.confirmPassword}
-              onChange={(e) =>
-                setInputs({ ...inputs, confirmPassword: e.target.value })
-              }
-            />
+            <div className=" relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm Password"
+                className="w-full input input-bordered h-10"
+                value={inputs.confirmPassword}
+                onChange={(e) =>
+                  setInputs({ ...inputs, confirmPassword: e.target.value })
+                }
+              />
+              <div
+                className="absolute inset-y-0 right-0 top-0 flex items-center pr-3 cursor-pointer"
+                onClick={() => setConfirmShowPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? (
+                  <FaRegEyeSlash className="text-black dark:text-white text-xl" />
+                ) : (
+                  <IoEyeOutline className="text-black dark:text-white text-xl" />
+                )}
+              </div>
+            </div>
           </div>
           <div>
             <label className="label">
