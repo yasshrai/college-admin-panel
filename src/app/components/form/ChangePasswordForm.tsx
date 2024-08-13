@@ -2,6 +2,9 @@
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import useChangePassword from "@/app/hooks/useChangePassword";
+import { useState } from "react";
+import { IoEyeOutline } from "react-icons/io5";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 export type ChangePasswordInput = {
   username: string;
@@ -18,6 +21,8 @@ const ChangePasswordForm: React.FC = () => {
     formState: { errors },
   } = useForm<ChangePasswordInput>();
   const { loading, changePassword } = useChangePassword();
+  const [showOldPassoword, setshowOldPassword] = useState<boolean>(false);
+  const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<ChangePasswordInput> = async (data) => {
     const success = await changePassword(data);
@@ -56,14 +61,26 @@ const ChangePasswordForm: React.FC = () => {
                   Old Password
                 </span>
               </label>
-              <input
-                {...register("oldPassword", {
-                  required: "Old password is required",
-                })}
-                className="w-full input input-bordered h-10"
-                type="password"
-                placeholder="Old Password"
-              />
+              <div className=" relative">
+                <input
+                  {...register("oldPassword", {
+                    required: "Old password is required",
+                  })}
+                  className="w-full input input-bordered h-10"
+                  type={showOldPassoword ? "text" : "password"}
+                  placeholder="Old Password"
+                />
+                <div
+                  className="absolute inset-y-0 right-0 top-0 flex items-center pr-3 cursor-pointer"
+                  onClick={() => setshowOldPassword(!showOldPassoword)}
+                >
+                  {showOldPassoword ? (
+                    <FaRegEyeSlash className="text-black dark:text-white text-xl" />
+                  ) : (
+                    <IoEyeOutline className="text-black dark:text-white text-xl" />
+                  )}
+                </div>
+              </div>
               {errors.oldPassword && (
                 <p className="text-red-500">{errors.oldPassword.message}</p>
               )}
@@ -74,14 +91,26 @@ const ChangePasswordForm: React.FC = () => {
                   New Password
                 </span>
               </label>
-              <input
-                {...register("newPassword", {
-                  required: "New password is required",
-                })}
-                className="w-full input input-bordered h-10"
-                type="password"
-                placeholder="New Password"
-              />
+              <div className="relative">
+                <input
+                  {...register("newPassword", {
+                    required: "New password is required",
+                  })}
+                  className="w-full input input-bordered h-10"
+                  type={showNewPassword ? "text" : "password"}
+                  placeholder="New Password"
+                />
+                <div
+                  className="absolute inset-y-0 right-0 top-0 flex items-center pr-3 cursor-pointer"
+                  onClick={() => setShowNewPassword(!showNewPassword)}
+                >
+                  {showNewPassword ? (
+                    <FaRegEyeSlash className="text-black dark:text-white text-xl" />
+                  ) : (
+                    <IoEyeOutline className="text-black dark:text-white text-xl" />
+                  )}
+                </div>
+              </div>
               {errors.newPassword && (
                 <p className="text-red-500">{errors.newPassword.message}</p>
               )}
