@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useAuthContext } from "../context/authContext";
+import { useAuthContext } from "@/app/context/authContext";
 import { useEffect } from "react";
 import Navbar from "./Navbar";
 const Home = () => {

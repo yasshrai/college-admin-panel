@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import useSignup from "../hooks/useSignup";
+import useSignup from "../../hooks/useSignup";
 import { IoEyeOutline } from "react-icons/io5";
 import { FaRegEyeSlash } from "react-icons/fa";
 

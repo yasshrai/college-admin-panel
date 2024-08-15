@@ -2,7 +2,7 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useEnterStudentData from "@/app/hooks/useEnterStudentData";
-import DropDown from "../DropDown";
+import DropDown from "../../ui/DropDown";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";

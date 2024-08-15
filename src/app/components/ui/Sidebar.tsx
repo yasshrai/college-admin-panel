@@ -5,16 +5,16 @@ import { PiStudentBold } from "react-icons/pi";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import HomeMessage from "./HomeMessage";
-import StudentForm from "./form/StudentForm";
-import ProfessorForm from "./form/ProfessorForm";
+import StudentForm from "../form/studentform/StudentForm";
+import ProfessorForm from "../form/professorform/ProfessorForm";
 import Signup from "./Signup";
-import ChangePasswordForm from "./form/ChangePasswordForm";
-import UpdateProfessorRender from "./form/UpdateProfessorRender";
-import UpdateStudentRender from "./form/UpdateStudentRender";
-import StudentList from "./StudentList";
-import ProfessorList from "./ProfessorList";
-import FilterableStudentList from "./FilterableStudentList";
-import AdminList from "./AdminList";
+import ChangePasswordForm from "../form/ChangePasswordForm";
+import UpdateProfessorRender from "../form/professorform/UpdateProfessorRender";
+import UpdateStudentRender from "../form/studentform/UpdateStudentRender";
+import ProfessorList from "../professorcomponents/ProfessorList";
+import FilterableStudentList from "../studentcomponents/FilterableStudentList";
+import StudentList from "../studentcomponents/StudentList";
+import AdminList from "../Admin/AdminList";
 
 const Sidebar = () => {
   const [selectedSection, setSelectedSection] = useState("home");

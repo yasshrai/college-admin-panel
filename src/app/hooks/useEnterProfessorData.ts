@@ -1,6 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { ProfessorFormData } from "../components/form/UpdateProfessorForm";
+import { ProfessorFormData } from "../components/form/professorform/UpdateProfessorForm";
 
 const useEnterProfessorData = () => {
   const [loading, setLoading] = useState(false);

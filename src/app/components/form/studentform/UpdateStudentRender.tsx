@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import UpdateProfessorForm from "./UpdateProfessorForm";
 import UpdateStudentForm from "./UpdateStudentForm";
 
 interface StudentFormDataForUpdate {

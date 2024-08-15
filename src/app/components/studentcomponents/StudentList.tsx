@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import StudentCard from "./StudentCard"; // Importing the StudentCard component
-import toast from "react-hot-toast";
 import Modal from "react-modal";
 
 interface Student {

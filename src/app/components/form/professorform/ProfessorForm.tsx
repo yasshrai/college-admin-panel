@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import useEnterProfessorData from "@/app/hooks/useEnterProfessorData";
-import DropDown from "../DropDown";
+import DropDown from "../../ui/DropDown";
 import axios from "axios";
 import toast from "react-hot-toast";
 

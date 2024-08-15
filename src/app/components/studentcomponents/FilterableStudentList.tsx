@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
-import DropDown from "./DropDown";
+import DropDown from "../ui/DropDown";
 import StudentCard from "./StudentCard";
 import Modal from "react-modal";
 

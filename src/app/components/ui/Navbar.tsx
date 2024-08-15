@@ -1,6 +1,6 @@
 import React from "react";
 import LogoutButton from "./Logoutbutton";
-import { useAuthContext } from "../context/authContext";
+import { useAuthContext } from "../../context/authContext";
 import { RxAvatar } from "react-icons/rx";
 
 const Navbar = () => {

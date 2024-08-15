@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
-import DropDown from "../DropDown";
+import DropDown from "../../ui/DropDown";
 
 // Define the types for the form data
 export interface ProfessorFormData {
