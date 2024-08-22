@@ -47,7 +47,7 @@ export default function Signup({ heading }: any) {
             </label>
             <input
               type="text"
-              placeholder="John Doe"
+              placeholder="enter your name"
               className="w-full input input-bordered  h-10"
               value={inputs.name}
               onChange={(e) => setInputs({ ...inputs, name: e.target.value })}
@@ -60,7 +60,7 @@ export default function Signup({ heading }: any) {
             </label>
             <input
               type="text"
-              placeholder="johndoe"
+              placeholder="enter your username"
               className="w-full input input-bordered h-10"
               value={inputs.username}
               onChange={(e) =>

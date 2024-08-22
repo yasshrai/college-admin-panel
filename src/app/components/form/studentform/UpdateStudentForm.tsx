@@ -26,7 +26,7 @@ interface StudentFormInputs {
   subjectinHighSchool?: string;
   regular?: boolean;
   busFacility?: boolean;
-  achievements?: string;
+  achivements?: string;
 }
 
 // Define the props type
@@ -437,10 +437,10 @@ const UpdateStudentForm: React.FC<UpdateStudentFormProps> = ({
             </label>
             <input
               className="w-full input input-bordered h-10"
-              {...register("achievements")}
+              {...register("achivements")}
             />
-            {errors.achievements && (
-              <p className="text-red-500">{errors.achievements.message}</p>
+            {errors.achivements && (
+              <p className="text-red-500">{errors.achivements.message}</p>
             )}
           </div>
 

@@ -105,7 +105,6 @@ const UpdateProfessorForm: React.FC<UpdateProfessorFormProps> = ({
             <input
               {...register("name", { required: "Name is required" })}
               className="w-full input input-bordered h-10"
-              placeholder="John Doe"
             />
             {errors.name && (
               <p className="text-red-500">{errors.name.message}</p>
@@ -120,7 +119,6 @@ const UpdateProfessorForm: React.FC<UpdateProfessorFormProps> = ({
               type="number"
               className="w-full input input-bordered h-10"
               {...register("age", { required: "Age is required" })}
-              placeholder="40"
             />
             {errors.age && <p className="text-red-500">{errors.age.message}</p>}
           </div>
@@ -159,7 +157,6 @@ const UpdateProfessorForm: React.FC<UpdateProfessorFormProps> = ({
             <input
               className="w-full input input-bordered h-10"
               {...register("professorId")}
-              placeholder="PROF12345"
               disabled
             />
             {errors.professorId && (
@@ -202,7 +199,6 @@ const UpdateProfessorForm: React.FC<UpdateProfessorFormProps> = ({
                   message: "Email address is invalid",
                 },
               })}
-              placeholder="john.doe@example.com"
             />
             {errors.emailAddress && (
               <p className="text-red-500">{errors.emailAddress.message}</p>

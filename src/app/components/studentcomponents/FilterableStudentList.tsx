@@ -26,7 +26,7 @@ interface FilterFormInputs {
   subjectinHighSchool?: string;
   regular?: boolean;
   busFacility?: boolean;
-  achievements?: string;
+  achivements?: string;
 }
 
 interface Student {
@@ -45,7 +45,7 @@ interface Student {
   subjectinHighSchool?: string;
   regular?: boolean;
   busFacility?: boolean;
-  achievements?: string;
+  achivements?: string;
 }
 
 const FilterableStudentList: React.FC = () => {
@@ -68,6 +68,7 @@ const FilterableStudentList: React.FC = () => {
     setError(null);
 
     const filteredFiltersObj = filteredFilters(filters);
+    console.log(filteredFiltersObj);
 
     try {
       const response = await axios.post(
@@ -300,7 +301,7 @@ const FilterableStudentList: React.FC = () => {
                 </span>
               </label>
               <input
-                {...register("achievements")}
+                {...register("achivements")}
                 className="w-full input input-bordered h-10"
               />
             </div>
