@@ -66,8 +66,8 @@ const StudentList: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="h-[90vh] md:h-[89vh] w-[99vw] md:w-[85vw] text-white font-bold text-xl">
-        Loading...
+      <div className="h-[90vh] md:h-[89vh] w-[99vw] md:w-[85vw] flex items-center justify-center ">
+        <div className=" size-96 loading loading-spinner text-white"></div>
       </div>
     );
   }
