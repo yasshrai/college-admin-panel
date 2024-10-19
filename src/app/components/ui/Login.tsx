@@ -73,7 +73,7 @@ const Login = () => {
             href="/signup"
             className="text-sm  hover:underline hover:text-blue-600 mt-2 inline-block text-white"
           >
-            don't have account?
+            don&apos;t have account?
           </Link>
 
           <div>
