@@ -68,6 +68,14 @@ const Login = () => {
             Forget Password?
           </Link>
 
+ 
+          <Link
+            href="/signup"
+            className="text-sm  hover:underline hover:text-blue-600 mt-2 inline-block text-white"
+          >
+            don't have account?
+          </Link>
+
           <div>
             <button
               className="btn btn-block btn-sm mt-2 hover:bg-sky-600 hover:text-white"
