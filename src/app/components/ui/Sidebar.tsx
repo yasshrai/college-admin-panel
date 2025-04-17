@@ -124,6 +124,7 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "addStudent"}
               onClick={() => handleSectionClick("addStudent")}
+              className=" hover:bg-slate-200 hover:text-black text-white"
             >
               Add Student Details
             </SidebarMenuButton>
@@ -132,6 +133,7 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "updateStudent"}
               onClick={() => handleSectionClick("updateStudent")}
+              className=" hover:bg-slate-200 hover:text-black text-white"
             >
               Update Student Details
             </SidebarMenuButton>
@@ -140,6 +142,7 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "showStudents"}
               onClick={() => handleSectionClick("showStudents")}
+              className=" hover:bg-slate-200 hover:text-black text-white"
             >
               Show All Students
             </SidebarMenuButton>
@@ -148,6 +151,7 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "filterStudents"}
               onClick={() => handleSectionClick("filterStudents")}
+              className=" hover:bg-slate-200 hover:text-black text-white"
             >
               Filter Students
             </SidebarMenuButton>
@@ -172,6 +176,7 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "addProfessor"}
               onClick={() => handleSectionClick("addProfessor")}
+              className=" hover:bg-slate-200 hover:text-black text-white"
             >
               Add Professor Details
             </SidebarMenuButton>
@@ -180,6 +185,7 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "updateProfessor"}
               onClick={() => handleSectionClick("updateProfessor")}
+              className=" hover:bg-slate-200 hover:text-black text-white"
             >
               Update Professor Details
             </SidebarMenuButton>
@@ -188,6 +194,7 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "showProfessors"}
               onClick={() => handleSectionClick("showProfessors")}
+              className=" hover:bg-slate-200 hover:text-black text-white"
             >
               Show All Professors
             </SidebarMenuButton>
@@ -209,7 +216,11 @@ const AdminSidebar = () => {
       <SidebarGroupContent>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton isActive={selectedSection === "addAdmin"} onClick={() => handleSectionClick("addAdmin")}>
+            <SidebarMenuButton 
+            isActive={selectedSection === "addAdmin"} 
+            onClick={() => handleSectionClick("addAdmin")}
+            className=" hover:bg-slate-200 hover:text-black text-white"
+            >
               Add Admin Details
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -217,6 +228,7 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "showAdmins"}
               onClick={() => handleSectionClick("showAdmins")}
+              className=" hover:bg-slate-200 hover:text-black text-white"
             >
               Show All Admins
             </SidebarMenuButton>
@@ -225,6 +237,7 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "changePassword"}
               onClick={() => handleSectionClick("changePassword")}
+              className=" hover:bg-slate-200 hover:text-black text-white"
             >
               Change Password
             </SidebarMenuButton>
