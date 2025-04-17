@@ -49,7 +49,7 @@ const AdminSidebar = () => {
         return (
           <div className="flex  h-screen w-screen md:h-[90vh] md:w-[80vw] flex-col items-center justify-center bg-background ">
             <div>
-              <StudentList/>
+              <StudentList />
             </div>
           </div>
         )
@@ -63,7 +63,7 @@ const AdminSidebar = () => {
         return (
           <div className="flex  h-screen w-screen md:h-[90vh] md:w-[80vw] flex-col items-center justify-center bg-background ">
             <div>
-              <ProfessorList/>
+              <ProfessorList />
             </div>
           </div>
         )
@@ -78,8 +78,8 @@ const AdminSidebar = () => {
       case "changePassword":
         return <ChangePasswordForm />
       case "showAdmins":
-        return <AdminList/>;
-            
+        return <AdminList />;
+
       default:
         return (
           <div className="flex h-[90vh] w-[80vw] flex-col items-center justify-center bg-background md:h-[89vh]">
@@ -87,7 +87,8 @@ const AdminSidebar = () => {
               <HomeMessage></HomeMessage>
             </div>
           </div>
-        )    }
+        )
+    }
   }
 
   // Mobile sidebar using Sheet component
@@ -124,7 +125,8 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "addStudent"}
               onClick={() => handleSectionClick("addStudent")}
-              className=" hover:bg-slate-200 hover:text-black text-white"
+              className={`hover:bg-slate-200 hover:text-black ${selectedSection === "addStudent" ? "bg-slate-200 text-black" : "text-white"
+                }`}
             >
               Add Student Details
             </SidebarMenuButton>
@@ -133,7 +135,8 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "updateStudent"}
               onClick={() => handleSectionClick("updateStudent")}
-              className=" hover:bg-slate-200 hover:text-black text-white"
+              className={`hover:bg-slate-200 hover:text-black ${selectedSection === "updateStudent" ? "bg-slate-200 text-black" : "text-white"
+                }`}
             >
               Update Student Details
             </SidebarMenuButton>
@@ -142,7 +145,8 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "showStudents"}
               onClick={() => handleSectionClick("showStudents")}
-              className=" hover:bg-slate-200 hover:text-black text-white"
+              className={`hover:bg-slate-200 hover:text-black ${selectedSection === "showStudents" ? "bg-slate-200 text-black" : "text-white"
+                }`}
             >
               Show All Students
             </SidebarMenuButton>
@@ -151,7 +155,8 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "filterStudents"}
               onClick={() => handleSectionClick("filterStudents")}
-              className=" hover:bg-slate-200 hover:text-black text-white"
+              className={`hover:bg-slate-200 hover:text-black ${selectedSection === "filterStudents" ? "bg-slate-200 text-black" : "text-white"
+                }`}
             >
               Filter Students
             </SidebarMenuButton>
@@ -176,7 +181,8 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "addProfessor"}
               onClick={() => handleSectionClick("addProfessor")}
-              className=" hover:bg-slate-200 hover:text-black text-white"
+              className={`hover:bg-slate-200 hover:text-black ${selectedSection === "addProfessor" ? "bg-slate-200 text-black" : "text-white"
+                }`}
             >
               Add Professor Details
             </SidebarMenuButton>
@@ -185,7 +191,8 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "updateProfessor"}
               onClick={() => handleSectionClick("updateProfessor")}
-              className=" hover:bg-slate-200 hover:text-black text-white"
+              className={`hover:bg-slate-200 hover:text-black ${selectedSection === "updateProfessor" ? "bg-slate-200 text-black" : "text-white"
+                }`}
             >
               Update Professor Details
             </SidebarMenuButton>
@@ -194,7 +201,8 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "showProfessors"}
               onClick={() => handleSectionClick("showProfessors")}
-              className=" hover:bg-slate-200 hover:text-black text-white"
+              className={`hover:bg-slate-200 hover:text-black ${selectedSection === "showProfessors" ? "bg-slate-200 text-black" : "text-white"
+                }`}
             >
               Show All Professors
             </SidebarMenuButton>
@@ -216,10 +224,11 @@ const AdminSidebar = () => {
       <SidebarGroupContent>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton 
-            isActive={selectedSection === "addAdmin"} 
-            onClick={() => handleSectionClick("addAdmin")}
-            className=" hover:bg-slate-200 hover:text-black text-white"
+            <SidebarMenuButton
+              isActive={selectedSection === "addAdmin"}
+              onClick={() => handleSectionClick("addAdmin")}
+              className={`hover:bg-slate-200 hover:text-black ${selectedSection === "addAdmin" ? "bg-slate-200 text-black" : "text-white"
+                }`}
             >
               Add Admin Details
             </SidebarMenuButton>
@@ -228,7 +237,8 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "showAdmins"}
               onClick={() => handleSectionClick("showAdmins")}
-              className=" hover:bg-slate-200 hover:text-black text-white"
+              className={`hover:bg-slate-200 hover:text-black ${selectedSection === "showAdmins" ? "bg-slate-200 text-black" : "text-white"
+                }`}
             >
               Show All Admins
             </SidebarMenuButton>
@@ -237,7 +247,8 @@ const AdminSidebar = () => {
             <SidebarMenuButton
               isActive={selectedSection === "changePassword"}
               onClick={() => handleSectionClick("changePassword")}
-              className=" hover:bg-slate-200 hover:text-black text-white"
+              className={`hover:bg-slate-200 hover:text-black ${selectedSection === "changePassword" ? "bg-slate-200 text-black" : "text-white"
+                }`}
             >
               Change Password
             </SidebarMenuButton>
