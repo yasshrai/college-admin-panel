@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
+import { useToast } from "@/hooks/use-toast"
 
 export type StudentFormInputs = {
   name: string
@@ -45,16 +46,24 @@ const StudentForm = () => {
   } = useForm<StudentFormInputs>()
   const [loading, setLoading] = useState(false)
   const [scholarNumber, setScholarNumber] = useState<string>("")
+  const {toast} = useToast()
 
   const createStudent = async (data: StudentFormInputs) => {
     setLoading(true)
     try {
       // Replace with your actual API endpoint
       await axios.post(`${process.env.NEXT_PUBLIC_API_PORT}/api/students/create`, data, { withCredentials: true })
-      // toast.success("Student added successfully")
+      toast({
+        title: "Success",
+        description: "Student added successfully",
+      })
       return true
     } catch (error) {
-      // toast.error("Failed to add student")
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to add student",
+      })
       return false
     } finally {
       setLoading(false)
@@ -78,7 +87,11 @@ const StudentForm = () => {
       setScholarNumber(newScholarNumber)
       setValue("scholarNumber", newScholarNumber)
     } catch (err) {
-      // toast.error("Error while generating scholar number")
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Error while generating scholar number",
+      })
     }
   }
 

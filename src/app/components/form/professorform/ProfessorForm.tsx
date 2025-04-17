@@ -38,10 +38,17 @@ const ProfessorForm: React.FC = () => {
     try {
       // Replace with your actual API endpoint
       await axios.post(`${process.env.NEXT_PUBLIC_API_PORT}/api/professors/create`, data, { withCredentials: true })
-      // toast.success("Professor added successfully")
+      toast({
+        title: "Success",
+        description: "Professor added successfully",
+      })
       return true
     } catch (error) {
-      // toast.error("Failed to add professor")
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Failed to add professor",
+      })
       return false
     } finally {
       setLoading(false)
@@ -65,7 +72,11 @@ const ProfessorForm: React.FC = () => {
       setProfessorId(newProfessorID)
       setValue("professorId", newProfessorID)
     } catch (error) {
-      // toast.error("Error while generating professorID")
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Error while generating professor ID",
+      })
     }
   }
 
