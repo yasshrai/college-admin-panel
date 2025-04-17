@@ -35,6 +35,21 @@
     --radius: 0.5rem;
   }
 }
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #020307; /* Tailwind primary */
+  border-radius: 9999px;
+}
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #000000 #a7a7a76e;
+}
 
 @layer base {
   * {

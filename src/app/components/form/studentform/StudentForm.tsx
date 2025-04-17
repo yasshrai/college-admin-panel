@@ -96,7 +96,7 @@ const StudentForm = () => {
   }
 
   return (
-    <div className="h-[90vh] md:h-[95vh] w-[99vw] md:w-[85vw] bg-zinc-950 overflow-auto p-4">
+    <div className="h-[90vh] md:h-[95vh] w-[99vw] md:w-[85vw] bg-zinc-950 overflow-auto custom-scrollbar p-4">
       <Card className="w-[80vw] md:w-[40vw] mx-auto ">
         <CardHeader>
           <CardTitle className="text-xl text-center text-gray-300">

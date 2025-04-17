@@ -27,7 +27,7 @@ const UpdateProfessorRender = () => {
   }
 
   return (
-    <div className="h-[89vh] md:h-[89vh] w-[98vw] md:w-[85vw]  overflow-auto flex flex-col items-center p-4">
+    <div className="h-[89vh] md:h-[89vh] w-[98vw] md:w-[85vw]  overflow-auto custom-scrollbar flex flex-col items-center p-4">
       <Card className="w-[80vw] md:w-[40vw] mx-auto border-zinc-700 mb-6">
         <CardContent className="p-6">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

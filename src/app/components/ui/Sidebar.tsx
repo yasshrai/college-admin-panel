@@ -46,7 +46,13 @@ const AdminSidebar = () => {
       case "updateStudent":
         return <UpdateStudentRender />
       case "showStudents":
-        return <StudentList />
+        return (
+          <div className="flex  h-screen w-screen md:h-[90vh] md:w-[80vw] flex-col items-center justify-center bg-background ">
+            <div>
+              <StudentList/>
+            </div>
+          </div>
+        )
       case "filterStudents":
         return <FilterableStudentList />
       case "addProfessor":
@@ -54,7 +60,13 @@ const AdminSidebar = () => {
       case "updateProfessor":
         return <UpdateProfessorRender />
       case "showProfessors":
-        return <ProfessorList />
+        return (
+          <div className="flex  h-screen w-screen md:h-[90vh] md:w-[80vw] flex-col items-center justify-center bg-background ">
+            <div>
+              <ProfessorList/>
+            </div>
+          </div>
+        )
       case "addAdmin":
         return (
           <div className="flex h-[90vh] w-[80vw] flex-col items-center justify-center bg-background md:h-[89vh]">
@@ -66,10 +78,16 @@ const AdminSidebar = () => {
       case "changePassword":
         return <ChangePasswordForm />
       case "showAdmins":
-        return <AdminList />
+        return <AdminList/>;
+            
       default:
-        return <HomeMessage />
-    }
+        return (
+          <div className="flex h-[90vh] w-[80vw] flex-col items-center justify-center bg-background md:h-[89vh]">
+            <div>
+              <HomeMessage></HomeMessage>
+            </div>
+          </div>
+        )    }
   }
 
   // Mobile sidebar using Sheet component

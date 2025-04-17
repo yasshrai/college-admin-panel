@@ -81,7 +81,7 @@ const ProfessorForm: React.FC = () => {
   }
 
   return (
-    <div className="h-[87vh] md:h-[89vh] w-[99vw] md:w-[85vw]  overflow-auto p-4">
+    <div className="h-[87vh] md:h-[89vh] w-[99vw] md:w-[85vw]  overflow-auto custom-scrollbar p-4">
       <Card className="w-[80vw] md:w-[40vw] mx-auto">
         <CardHeader>
           <CardTitle className="text-xl text-center text-gray-300">

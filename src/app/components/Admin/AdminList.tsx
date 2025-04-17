@@ -76,7 +76,7 @@ const AdminList = () => {
   }
 
   return (
-    <div className="flex min-h-screen w-[80vw] flex-col items-center justify-center overflow-auto p-4">
+      <div className="flex h-screen w-[80vw] flex-col items-center justify-center overflow-auto custom-scrollbar p-4">
       <Card className="w-full max-w-3xl">
         <CardHeader>
           <CardTitle className="text-center">
