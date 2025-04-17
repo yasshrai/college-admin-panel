@@ -1,11 +1,18 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Eye, EyeOff, Loader2 } from 'lucide-react'
 import useSignup from "../../hooks/useSignup";
-import { IoEyeOutline } from "react-icons/io5";
-import { FaRegEyeSlash } from "react-icons/fa";
 
-export default function Signup({ heading }: any) {
+interface SignupProps {
+  heading: string
+}
+
+export default function Signup({ heading }: SignupProps) {
   const [inputs, setInputs] = useState({
     name: "",
     username: "",
@@ -34,139 +41,131 @@ export default function Signup({ heading }: any) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-w-96 mx-auto  rounded-lg  shadow-lg bg-zinc-900 ">
-      <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
-        <h1 className="text-xl font-semibold text-center text-gray-300">
-          {heading} <span className="text-blue-500"> college admin panel</span>
-        </h1>
-
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label className="label p-2">
-              <span className="text-base label-text text-white">Full Name</span>
-            </label>
-            <input
+    <Card className="w-96 mx-auto  border-zinc-700">
+      <CardHeader>
+        <CardTitle className="text-xl text-center text-gray-300">
+          {heading} <span className="text-blue-500">college admin panel</span>
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div className="space-y-2">
+            <Label htmlFor="name" className="text-white">
+              Full Name
+            </Label>
+            <Input
+              id="name"
               type="text"
-              placeholder="enter your name"
-              className="w-full input input-bordered  h-10"
+              placeholder="Enter your name"
+              className=" text-white"
               value={inputs.name}
               onChange={(e) => setInputs({ ...inputs, name: e.target.value })}
             />
           </div>
 
-          <div>
-            <label className="label p-2 ">
-              <span className="text-base label-text text-white">Username</span>
-            </label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="username" className="text-white">
+              Username
+            </Label>
+            <Input
+              id="username"
               type="text"
-              placeholder="enter your username"
-              className="w-full input input-bordered h-10"
+              placeholder="Enter your username"
+              className=" text-white"
               value={inputs.username}
-              onChange={(e) =>
-                setInputs({ ...inputs, username: e.target.value })
-              }
+              onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
             />
           </div>
 
-          <div>
-            <label className="label">
-              <span className="text-base label-text text-white">Password</span>
-            </label>
+          <div className="space-y-2">
+            <Label htmlFor="password" className="text-white">
+              Password
+            </Label>
             <div className="relative">
-              <input
+              <Input
+                id="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter Password"
-                className="w-full input input-bordered h-10"
+                className=" text-white pr-10"
                 value={inputs.password}
-                onChange={(e) =>
-                  setInputs({ ...inputs, password: e.target.value })
-                }
+                onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
               />
-              <div
-                className="absolute inset-y-0 right-0 top-0 flex items-center pr-3 cursor-pointer"
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-200"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? (
-                  <FaRegEyeSlash className="text-black dark:text-white text-xl" />
-                ) : (
-                  <IoEyeOutline className="text-black dark:text-white text-xl" />
-                )}
-              </div>
+                {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+              </button>
             </div>
           </div>
 
-          <div>
-            <label className="label">
-              <span className="text-base label-text text-white">
-                Confirm Password
-              </span>
-            </label>
-            <div className=" relative">
-              <input
+          <div className="space-y-2">
+            <Label htmlFor="confirmPassword" className="text-white">
+              Confirm Password
+            </Label>
+            <div className="relative">
+              <Input
+                id="confirmPassword"
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirm Password"
-                className="w-full input input-bordered h-10"
+                className=" text-white pr-10"
                 value={inputs.confirmPassword}
-                onChange={(e) =>
-                  setInputs({ ...inputs, confirmPassword: e.target.value })
-                }
+                onChange={(e) => setInputs({ ...inputs, confirmPassword: e.target.value })}
               />
-              <div
-                className="absolute inset-y-0 right-0 top-0 flex items-center pr-3 cursor-pointer"
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-200"
                 onClick={() => setConfirmShowPassword(!showConfirmPassword)}
               >
-                {showConfirmPassword ? (
-                  <FaRegEyeSlash className="text-black dark:text-white text-xl" />
-                ) : (
-                  <IoEyeOutline className="text-black dark:text-white text-xl" />
-                )}
-              </div>
+                {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+              </button>
             </div>
           </div>
-          <div>
-            <label className="label">
-              <span className="text-base label-text text-white">Email</span>
-            </label>
-            <input
+
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-white">
+              Email
+            </Label>
+            <Input
+              id="email"
               type="email"
               placeholder="Enter your Email"
-              className="w-full input input-bordered h-10"
+              className=" text-white"
               value={inputs.email}
               onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
             />
           </div>
-          <div>
-            <label className="label">
-              <span className="text-base label-text text-white">
-                who is your favourite superhero?
-              </span>
-            </label>
-            <input
+
+          <div className="space-y-2">
+            <Label htmlFor="followUp" className="text-white">
+              Who is your favourite superhero?
+            </Label>
+            <Input
+              id="followUp"
               type="text"
-              placeholder="superhero"
-              className="w-full input input-bordered h-10"
+              placeholder="Superhero"
+              className=" text-white"
               value={inputs.followUp}
-              onChange={(e) =>
-                setInputs({ ...inputs, followUp: e.target.value })
-              }
+              onChange={(e) => setInputs({ ...inputs, followUp: e.target.value })}
             />
           </div>
 
-          <div>
-            <button
-              className="btn btn-block btn-sm mt-2 border border-slate-700 hover:bg-sky-600 hover:text-white"
-              disabled={loading}
-            >
-              {loading ? (
-                <span className="loading loading-spinner"></span>
-              ) : (
-                "Sign Up"
-              )}
-            </button>
-          </div>
+          <Button
+            type="submit"
+            className="w-full bg-zinc-700 hover:bg-blue-600 text-white"
+            disabled={loading}
+          >
+            {loading ? (
+              <span className="flex items-center">
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Loading
+              </span>
+            ) : (
+              "Sign Up"
+            )}
+          </Button>
         </form>
-      </div>
-    </div>
-  );
+      </CardContent>
+    </Card>
+  )
 }

@@ -1,22 +1,26 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import useEnterProfessorData from "@/app/hooks/useEnterProfessorData";
-import DropDown from "../../ui/DropDown";
-import axios from "axios";
-import toast from "react-hot-toast";
+import type React from "react"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import axios from "axios"
+import { toast } from "@/hooks/use-toast"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 type ProfessorFormInputs = {
-  name: string;
-  age: number;
-  department: string;
-  position: string;
-  professorId: string;
-  mobileNumber: string;
-  emailAddress: string;
-  residenceAddress: string;
-};
+  name: string
+  age: number
+  department: string
+  position: string
+  professorId: string
+  mobileNumber: string
+  emailAddress: string
+  residenceAddress: string
+}
 
 const ProfessorForm: React.FC = () => {
   const {
@@ -25,192 +29,218 @@ const ProfessorForm: React.FC = () => {
     reset,
     setValue,
     formState: { errors },
-  } = useForm<ProfessorFormInputs>();
-  const { loading, createProfessor } = useEnterProfessorData();
-  const [professorId, setProfessorId] = useState<string>();
-  const onSubmit: SubmitHandler<ProfessorFormInputs> = async (data) => {
-    const success = await createProfessor(data);
-    if (success) {
-      reset();
-      setProfessorId("");
+  } = useForm<ProfessorFormInputs>()
+  const [loading, setLoading] = useState(false)
+  const [professorId, setProfessorId] = useState<string>("")
+
+  const createProfessor = async (data: ProfessorFormInputs) => {
+    setLoading(true)
+    try {
+      // Replace with your actual API endpoint
+      await axios.post(`${process.env.NEXT_PUBLIC_API_PORT}/api/professors/create`, data, { withCredentials: true })
+      // toast.success("Professor added successfully")
+      return true
+    } catch (error) {
+      // toast.error("Failed to add professor")
+      return false
+    } finally {
+      setLoading(false)
     }
-  };
+  }
+
+  const onSubmit = async (data: ProfessorFormInputs) => {
+    const success = await createProfessor(data)
+    if (success) {
+      reset()
+      setProfessorId("")
+    }
+  }
+
   const generateRandomProfessorId = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_PORT}/api/professors//get/uniqueprofessorid`,
-        {
-          withCredentials: true,
-        }
-      );
-      const newProfessorID = response.data.professorId;
-      setProfessorId(newProfessorID);
-      setValue("professorId", newProfessorID);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_PORT}/api/professors//get/uniqueprofessorid`, {
+        withCredentials: true,
+      })
+      const newProfessorID = response.data.professorId
+      setProfessorId(newProfessorID)
+      setValue("professorId", newProfessorID)
     } catch (error) {
-      toast.error("Error while generating professorID");
+      // toast.error("Error while generating professorID")
     }
-  };
+  }
 
   return (
-    <div className="h-[87vh] md:h-[89vh] w-[99vw] md:w-[85vw] bg-zinc-900 overflow-auto ">
-      <div className="w-[80vw] md:w-[40vw] flex flex-col items-center justify-center min-w-96 mx-auto rounded-lg shadow-lg bg-zinc-900">
-        <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
-          <h1 className="text-xl font-semibold text-center text-gray-300">
+    <div className="h-[87vh] md:h-[89vh] w-[99vw] md:w-[85vw]  overflow-auto p-4">
+      <Card className="w-[80vw] md:w-[40vw] mx-auto">
+        <CardHeader>
+          <CardTitle className="text-xl text-center text-gray-300">
             Add <span className="text-blue-500">Professor</span>
-          </h1>
-
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">Name</span>
-              </label>
-              <input
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name" className="text-white">
+                Name
+              </Label>
+              <Input
+                id="name"
                 {...register("name", { required: "Name is required" })}
-                className="w-full input input-bordered h-10"
+                className=""
               />
-              {errors.name && (
-                <p className="text-red-500">{errors.name.message}</p>
-              )}
+              {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
             </div>
 
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">Age</span>
-              </label>
-              <input
-                type="text"
-                className="w-full input input-bordered h-10"
+            <div className="space-y-2">
+              <Label htmlFor="age" className="text-white">
+                Age
+              </Label>
+              <Input
+                id="age"
+                type="number"
                 {...register("age", { required: "Age is required" })}
+                className=""
               />
-              {errors.age && (
-                <p className="text-red-500">{errors.age.message}</p>
-              )}
+              {errors.age && <p className="text-red-500 text-sm">{errors.age.message}</p>}
             </div>
 
-            <DropDown
-              name="department"
-              label="Department"
-              options={[
-                "",
-                "School of Computer Science",
-                "School of Management",
-                "School of Commerce",
-                "School of Fashion",
-                "School of LAW",
-              ]}
-              register={register}
-            />
+            <div className="space-y-2">
+              <Label htmlFor="department" className="text-white">
+                Department
+              </Label>
+              <Select onValueChange={(value) => setValue("department", value)} defaultValue="select_department">
+                <SelectTrigger className="">
+                  <SelectValue placeholder="Select department" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="select_department">Select department</SelectItem>
+                  <SelectItem value="School of Computer Science">School of Computer Science</SelectItem>
+                  <SelectItem value="School of Management">School of Management</SelectItem>
+                  <SelectItem value="School of Commerce">School of Commerce</SelectItem>
+                  <SelectItem value="School of Fashion">School of Fashion</SelectItem>
+                  <SelectItem value="School of LAW">School of LAW</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
-            <DropDown
-              name="position"
-              label="Position"
-              options={[
-                "",
-                "assistant professor",
-                "Head of Department",
-                "senior professor",
-              ]}
-              register={register}
-            />
+            <div className="space-y-2">
+              <Label htmlFor="position" className="text-white">
+                Position
+              </Label>
+              <Select onValueChange={(value) => setValue("position", value)} defaultValue="select_position">
+                <SelectTrigger className="">
+                  <SelectValue placeholder="Select position" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="select_position">Select position</SelectItem>
+                  <SelectItem value="assistant professor">Assistant Professor</SelectItem>
+                  <SelectItem value="Head of Department">Head of Department</SelectItem>
+                  <SelectItem value="senior professor">Senior Professor</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Professor ID
-                </span>
-              </label>
-              <input
-                className="w-full input input-bordered h-10"
+            <div className="space-y-2">
+              <Label htmlFor="professorId" className="text-white">
+                Professor ID
+              </Label>
+              <Input
+                id="professorId"
                 {...register("professorId")}
                 value={professorId}
                 onChange={(e) => setProfessorId(e.target.value)}
+                className=""
               />
-              {errors.professorId && (
-                <p className="text-red-500">{errors.professorId.message}</p>
-              )}
-              <button
+              <Button
                 type="button"
                 onClick={generateRandomProfessorId}
-                className="btn mt-2 hover:bg-blue-700 hover:text-white transition ease-in-out duration-75"
+                variant="outline"
+                className="w-full mt-2 border-zinc-600 hover:bg-blue-700 hover:text-white transition-colors"
               >
                 Generate Unique ProfessorID
-              </button>
+              </Button>
             </div>
 
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Mobile Number
-                </span>
-              </label>
-              <input
-                className="w-full input input-bordered h-10"
+            <div className="space-y-2">
+              <Label htmlFor="mobileNumber" className="text-white">
+                Mobile Number
+              </Label>
+              <Input
+                id="mobileNumber"
                 {...register("mobileNumber", {
                   pattern: {
                     value: /^\d{10}$/,
                     message: "Mobile number must be 10 digits",
                   },
                 })}
+                className=""
               />
-              {errors.mobileNumber && (
-                <p className="text-red-500">{errors.mobileNumber.message}</p>
-              )}
+              {errors.mobileNumber && <p className="text-red-500 text-sm">{errors.mobileNumber.message}</p>}
             </div>
 
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Email Address
-                </span>
-              </label>
-              <input
-                className="w-full input input-bordered h-10"
+            <div className="space-y-2">
+              <Label htmlFor="emailAddress" className="text-white">
+                Email Address
+              </Label>
+              <Input
+                id="emailAddress"
+                type="email"
                 {...register("emailAddress", {
                   pattern: {
                     value: /\S+@\S+\.\S+/,
                     message: "Email address is invalid",
                   },
                 })}
+                className=""
               />
-              {errors.emailAddress && (
-                <p className="text-red-500">{errors.emailAddress.message}</p>
-              )}
+              {errors.emailAddress && <p className="text-red-500 text-sm">{errors.emailAddress.message}</p>}
             </div>
 
-            <div>
-              <label className="label p-2">
-                <span className="text-base label-text text-white">
-                  Residence Address
-                </span>
-              </label>
-              <input
-                className="w-full input input-bordered h-10"
+            <div className="space-y-2">
+              <Label htmlFor="residenceAddress" className="text-white">
+                Residence Address
+              </Label>
+              <Input
+                id="residenceAddress"
                 {...register("residenceAddress")}
+                className=""
               />
-              {errors.residenceAddress && (
-                <p className="text-red-500">
-                  {errors.residenceAddress.message}
-                </p>
+            </div>
+
+            <Button type="submit" className="w-full bg-zinc-700 hover:bg-blue-600 text-white" disabled={loading}>
+              {loading ? (
+                <span className="flex items-center justify-center">
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Loading
+                </span>
+              ) : (
+                "Submit"
               )}
-            </div>
-
-            <div>
-              <button
-                className="btn btn-block btn-sm mt-2 border border-slate-700 hover:bg-sky-600 hover:text-white"
-                type="submit"
-              >
-                {loading ? (
-                  <span className="loading loading-spinner "></span>
-                ) : (
-                  "Submit"
-                )}
-              </button>
-            </div>
+            </Button>
           </form>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
-  );
-};
+  )
+}
 
-export default ProfessorForm;
+export default ProfessorForm

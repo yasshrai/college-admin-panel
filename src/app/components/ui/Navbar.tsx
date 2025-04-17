@@ -1,45 +1,74 @@
-import React from "react";
-import LogoutButton from "./Logoutbutton";
-import { useAuthContext } from "../../context/authContext";
-import { RxAvatar } from "react-icons/rx";
-import renaissancelogo from "@/assets/renaissancelogo.png";
-import Image from "next/image";
+"use client"
+import Image from "next/image"
+import { User } from "lucide-react"
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+import { useAuthContext } from "../../context/authContext"
+import LogoutButton from "./Logoutbutton"
+import renaissancelogo from "@/assets/renaissancelogo.png"
 const Navbar = () => {
-  const { authUser } = useAuthContext();
+  const { authUser } = useAuthContext()
 
   return (
-    <div className="w-full h-[10vh] bg-neutral-950 p-10 flex flex-row items-center justify-between md:justify-evenly">
-      <div className="flex flex-row gap-1 items-center justify-center">
-        <h1 className="text-xl md:text-2xl text-white">College Admin Panel</h1>
-        <Image
-          src={renaissancelogo}
-          className="h-10 w-10 hidden lg:block"
-          alt="logo"
-        ></Image>
-      </div>
-      <div className="flex flex-row-reverse gap-5 items-center">
-        <LogoutButton />
-        {authUser && (
-          <div className="relative flex items-center gap-1 group">
-            <RxAvatar
-              className="text-2xl text-white"
-              aria-label="User Avatar"
+    <div className="flex h-16 items-center justify-between border-b bg-background px-4 md:px-6">
+      <div className="flex items-center justify-between w-full px-4">
+        {authUser?.logo && (
+          <div className="ml-auto">
+            <Image
+              src={renaissancelogo}
+              height={40}
+              width={40}
+              alt="College logo"
+              className="h-10 w-10"
             />
-            <h1 className=" text-white">{authUser.username}</h1>
-            <div className="absolute top-10 left-0 hidden mb-8 w-56 p-4 bg-neutral-900 text-white rounded-lg shadow-lg group-hover:block z-50">
-              <p>
-                <strong className="pr-2">Fullname:</strong> {authUser.name}
-              </p>
-              <p>
-                <strong className="pr-2">email:</strong> {authUser.email}
-              </p>
-            </div>
           </div>
         )}
       </div>
-    </div>
-  );
-};
 
-export default Navbar;
+
+      <div className="flex items-center gap-4">
+        {authUser && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="relative flex items-center gap-2 p-1">
+                <Avatar className="h-8 w-8">
+                  <AvatarImage src="/placeholder-user.jpg" alt={authUser.username} />
+                  <AvatarFallback>{authUser.username?.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <span className="hidden md:inline-block">{authUser.username}</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <User className="mr-2 h-4 w-4" />
+                <span>Profile</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <strong className="mr-2">Full name:</strong> {authUser.name}
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <strong className="mr-2">Email:</strong> {authUser.email}
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <LogoutButton />
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default Navbar

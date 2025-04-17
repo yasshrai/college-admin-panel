@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Kanit } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "react-hot-toast";
 import { AuthContextProvider } from "./context/authContext";
+import { Toaster as HotToaster } from "react-hot-toast";
+import { Toaster as UiToaster } from "@/components/ui/toaster";
+import { ThemeProvider } from "./components/ui/theme-provider";
 
 const kanit = Kanit({ subsets: ["latin"], weight: "200" });
 export const metadata: Metadata = {
@@ -19,9 +21,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={kanit.className}>
         <AuthContextProvider>
-          <Toaster position="top-center"></Toaster>
+        <ThemeProvider>
+
+          <HotToaster position="top-center" />
+          <UiToaster />
           {children}
+        </ThemeProvider>
         </AuthContextProvider>
+
       </body>
     </html>
   );
