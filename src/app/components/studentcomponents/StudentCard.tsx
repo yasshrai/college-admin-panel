@@ -176,7 +176,7 @@ const StudentCard = ({ student }: { student: Student }) => {
                 <Users className="h-4 w-4 text-primary" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-sm text-muted-foreground">Father's Name</p>
+                <p className="text-sm text-muted-foreground">Father&apos;s Name</p>
                 <p className="font-medium truncate">{student.fatherName || "N/A"}</p>
               </div>
             </div>
@@ -186,7 +186,7 @@ const StudentCard = ({ student }: { student: Student }) => {
                 <Users className="h-4 w-4 text-primary" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-sm text-muted-foreground">Mother's Name</p>
+                <p className="text-sm text-muted-foreground">Mother&apos;s Name</p>
                 <p className="font-medium truncate">{student.motherName || "N/A"}</p>
               </div>
             </div>
