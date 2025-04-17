@@ -57,7 +57,7 @@ const ForgetPassword = () => {
   }
 
   return (
-    <Card className="w-[22rem] md:w-96 mx-auto bg-zinc-800 border-zinc-700">
+    <Card className="w-[22rem] md:w-96 mx-auto  border-zinc-700">
       <CardHeader>
         <CardTitle className="text-xl text-center text-gray-300">
           Create New Password <span className="text-blue-500">college admin panel</span>
@@ -73,7 +73,7 @@ const ForgetPassword = () => {
               id="username"
               type="text"
               placeholder="Enter username"
-              className="bg-zinc-700 border-zinc-600 text-white"
+              className=" border-zinc-600 text-white"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -87,7 +87,7 @@ const ForgetPassword = () => {
               id="followUp"
               type="text"
               placeholder="Enter follow-up"
-              className="bg-zinc-700 border-zinc-600 text-white"
+              className=" border-zinc-600 text-white"
               value={followUp}
               onChange={(e) => setFollowUp(e.target.value)}
             />
@@ -102,7 +102,7 @@ const ForgetPassword = () => {
                 id="newPassword"
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter Password"
-                className="bg-zinc-700 border-zinc-600 text-white pr-10"
+                className=" border-zinc-600 text-white pr-10"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
@@ -125,7 +125,7 @@ const ForgetPassword = () => {
                 id="confirmPassword"
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirm Password"
-                className="bg-zinc-700 border-zinc-600 text-white pr-10"
+                className=" border-zinc-600 text-white pr-10"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
